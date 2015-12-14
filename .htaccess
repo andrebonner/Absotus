@@ -1,0 +1,13 @@
+RewriteEngine On
+Options All -Indexes
+
+RewriteCond %(REQUEST_FILENAME) !-d
+RewriteCond %(REQUEST_FILENAME) !-f
+RewriteCond %(REQUEST_FILENAME) !-l
+
+RewriteCond $1 !^(webroot|locale|views|bootstrap|tests|images|js|css|fonts|favicon\.ico|robots\.txt|index\.php) [NC]
+
+RewriteRule ^(.+)$ index.php?var=$1 [QSA,L]
+
+
+
