@@ -24,6 +24,7 @@ class Login_Model extends Model {
         global $REG;
         $this->_setting = $REG;
         try {
+            //print_r($_SERVER); die();
             $form = new Form();
 
             $form->post('email')
@@ -61,7 +62,7 @@ class Login_Model extends Model {
                 header('location: ../index.php', true);
                 die();
             } else {
-                return 'Login could not be processed';
+                return;
             }
         } catch (Exception $e) {
             return $e->getMessage();

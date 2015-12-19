@@ -28,6 +28,7 @@ class Index extends Controller {
     function index() {
         global $REG;
         $cfg = $REG;
+        
         $this->view->title = 'Dashboard';
         $this->view->data = array('description' => 'This page is the index', 'cfg' => $this->cfg, 'user' => Session::get('user'));
         $this->view->css = array(
@@ -36,6 +37,7 @@ class Index extends Controller {
         //$this->view->css = array('/index/css/carousel.css');
         $this->view->js = array(
             'app/webroot/bootstrap/js/jquery.min.js',
+            'app/webroot/angular/angular.min.js',
             'app/webroot/bootstrap/js/bootstrap.min.js',
             'app/views/index/js/holder.js');
         echo "<!--" . strtoupper("Welcome to " . $this->view->data['cfg']->title) . "-->\n";

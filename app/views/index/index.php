@@ -4,7 +4,7 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
-<html>
+<html ng-app>
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -35,8 +35,14 @@ and open the template in the editor.
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="#">Dashboard</a></li>
                         <li><a href="#">Settings</a></li>
-                        <li><a href="#" title="<?php print_r($this->data['user']); ?>">Profile</a></li>
-                        <li><a href="login/logout">Logout</a></li>
+                        <li class="dropdown">
+                            <a href="#" data-toggle="dropdown" title="<?php print_r($this->data['user']); ?>">Profile</a>
+                            <ul class="dropdown-menu">
+                                <li><a href="account/logout"><i class="glyphicon glyphicon-log-out"></i>&nbsp;Logout</a></li>
+                            </ul>
+                        </li>
+                        
+                        <li><a href="#">Help</a></li>
                     </ul>
                     <form class="navbar-form navbar-right">
                         <input type="text" class="form-control" placeholder="Search...">
@@ -92,7 +98,7 @@ and open the template in the editor.
                             <span class="text-muted">Something else</span>
                         </div>
                     </div>
-
+{{4 + 5}}
                     <h2 class="sub-header">Section title</h2>
                     <div class="table-responsive">
                         <table class="table table-striped">
@@ -220,6 +226,11 @@ and open the template in the editor.
                                 </tr>
                             </tbody>
                         </table>
+                        <ul class="pagination">
+                            <li><a href="#">1</a></li>
+                            <li><a href="#">2</a></li>
+                            <li><a href="#">3</a></li>
+                        </ul>
                     </div>
                 </div>
             </div>

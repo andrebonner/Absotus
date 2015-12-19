@@ -49,7 +49,7 @@ class Form {
     private $_error = array();
 
     public function __construct() {
-        $this->_val = new Val();
+         $this->_val = new Val();
     }
 
     public function post($field) {
@@ -71,6 +71,7 @@ class Form {
     }
 
     public function val($typeOfValidator, $arg = null) {
+        if($_SERVER['REQUEST_METHOD']!='POST') return $this;
         if ($arg == null)
             $error = $this->_val->{$typeOfValidator}($this->_postData[$this->_currentItem]);
         else
