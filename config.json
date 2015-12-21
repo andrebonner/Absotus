@@ -1,10 +1,12 @@
 {
-    "name": "Andre Bonner <andre.s.bonner@gmail.com>",
-    "title": "Absotus",
-    "url": "http://localhost/Absotus",
-    "db_type": "mysqli",
-    "db_host": "localhost",
-    "db_name": "client_info",
-    "db_user": "client",
-    "db_pass": "pass"
+    "config": [{
+            "author": "Andre Bonner <andre.s.bonner@gmail.com>",
+            "title": "Absotus",
+            "url": "http://localhost/Absotus",
+            "db_type": "mysqli",
+            "db_host": "localhost",
+            "db_name": "client_info",
+            "db_user": "client",
+            "db_pass": "pass"
+        }]
 }

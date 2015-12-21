@@ -38,6 +38,8 @@ class Index extends Controller {
         $this->view->js = array(
             'app/webroot/bootstrap/js/jquery.min.js',
             'app/webroot/angular/angular.min.js',
+            'app/views/index/js/dashboardApp.js',
+            'app/views/index/js/mainCtrl.js',
             'app/webroot/bootstrap/js/bootstrap.min.js',
             'app/views/index/js/holder.js');
         echo "<!--" . strtoupper("Welcome to " . $this->view->data['cfg']->title) . "-->\n";

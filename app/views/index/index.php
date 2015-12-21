@@ -4,7 +4,7 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
-<html ng-app>
+<html ng-app="dashboard">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -73,8 +73,8 @@ and open the template in the editor.
                         <li><a href="">Another nav item</a></li>
                     </ul>
                 </div>
-                <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-                    <h1 class="page-header">Dashboard</h1>
+                <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" ng-controller="mainController">
+                    <h1 class="page-header">Dashboard {{4 + 5}}</h1>
 
                     <div class="row placeholders">
                         <div class="col-xs-6 col-sm-3 placeholder">
@@ -98,8 +98,8 @@ and open the template in the editor.
                             <span class="text-muted">Something else</span>
                         </div>
                     </div>
-{{4 + 5}}
-                    <h2 class="sub-header">Section title</h2>
+
+                    <h2 class="sub-header">Section title {{title}}</h2>
                     <div class="table-responsive">
                         <table class="table table-striped">
                             <thead>
