@@ -1,4 +1,6 @@
-app.controller('mainController', function($scope,$http){
-    $scope.title = "- Objects";
-    $http.get("config.json").then(function(response) {$scope.config = response.data.config;});
+app.controller('mainController', function ($scope, $http) {
+    $scope.title = "Current Projects";
+    $http.get("index/get").then(function (response) {
+        $scope.data = response.data.dashboard;
+    });
 });

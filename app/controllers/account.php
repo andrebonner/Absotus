@@ -20,14 +20,19 @@ class Account extends Controller {
         //print "Index Page";
         Session::init();
         $logged = Session::get('loggedIn');
-        if ($logged) {
-            header('location: ../index.php', true);
+        if (!$logged) {
+            header('location: login', true);
             die();
         }
     }
-    
+
+    function get() {
+        echo 'Account';
+    }
+
     function logout() {
         Session::destroy();
-        header("location: /login");
+        header("location: login");
     }
+
 }
