@@ -42,7 +42,7 @@ class Login_Model extends Model {
             print $password = Hash::create('md5', $postf['password'], $this->_setting->hash_pass_key);
             print "</pre>";
 
-            $sth = $this->db->prepare("SELECT a.id, c.role FROM users a INNER JOIN user_roles b ON b.user_id = a.id INNER JOIN roles c ON b.user_role = c.id WHERE a.username =:username AND a.password =:password");
+            $sth = $this->db->prepare("SELECT a.id, a.username, a.email, a.password, c.role FROM users a INNER JOIN user_roles b ON b.user_id = a.id INNER JOIN roles c ON b.user_role = c.id WHERE a.username =:username AND a.password =:password");
             $sth->bindValue(':username' , $postf['email']);
             $sth->bindValue(':password' , $password);
             $sth->execute();

@@ -21,7 +21,8 @@ class Index extends Controller {
         Session::init();
         $logged = Session::get('loggedIn');
         if (!$logged) {
-            header("Location: login");
+            header("Location: ./account/login",true);
+            die();
         }
     }
 
