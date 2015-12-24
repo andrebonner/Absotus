@@ -31,7 +31,7 @@ class Account extends Controller {
     }
 
     function login() {
-        $data = $this->model->login();
+        if($_SERVER['REQUEST_METHOD']=='POST') $data = $this->model->login();
 
         global $REG;
         $cfg = $REG;
@@ -40,40 +40,41 @@ class Account extends Controller {
         $this->view->css = array(
             'app/webroot/bootstrap/css/bootstrap.min.css',
             'app/webroot/toastr/css/toastr.css',
-            'app/views/login/css/login-template.css');
+            'app/views/account/css/login-template.css');
         //$this->view->css = array('/index/css/carousel.css');
         $this->view->js = array(
             'app/webroot/bootstrap/js/jquery.min.js',
             'app/webroot/bootstrap/js/bootstrap.min.js',
             'app/webroot/toastr/js/toastr.js',
-            'app/views/login/js/script.js');
+            'app/views/account/js/login.js');
         //echo "<!--" . strtoupper("Welcome to " . $this->view->data['cfg']->title) . "-->\n";
-        //$this->view->render("header");
+        $this->view->render("account/header");
         $this->view->render("account/login");
-        //$this->view->render("footer");
+        $this->view->render("account/footer");
     }
 
     function changepassword() {
-        $data = $this->model->run();
+        if($_SERVER['REQUEST_METHOD']=='POST') $data = $this->model->changepassword();
 
         global $REG;
         $cfg = $REG;
+        
         $this->view->title = 'Change Password';
         $this->view->data = array('description' => 'This page is the change password', 'cfg' => $this->cfg, 'error' => $data);
         $this->view->css = array(
             'app/webroot/bootstrap/css/bootstrap.min.css',
             'app/webroot/toastr/css/toastr.css',
-            'app/views/login/css/login-template.css');
+            'app/views/account/css/login-template.css');
         //$this->view->css = array('/index/css/carousel.css');
         $this->view->js = array(
             'app/webroot/bootstrap/js/jquery.min.js',
             'app/webroot/bootstrap/js/bootstrap.min.js',
             'app/webroot/toastr/js/toastr.js',
-            'app/views/login/js/script.js');
+            'app/views/account/js/changepassword.js');
         //echo "<!--" . strtoupper("Welcome to " . $this->view->data['cfg']->title) . "-->\n";
-        //$this->view->render("header");
+        $this->view->render("account/header");
         $this->view->render("account/changepassword");
-        //$this->view->render("footer");
+        $this->view->render("account/footer");
     }
 
     function verifycode() {

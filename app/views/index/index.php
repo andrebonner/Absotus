@@ -31,13 +31,14 @@ and open the template in the editor.
                     </button>
                     <a class="navbar-brand" href="#">Absotus</a>
                 </div>
-                <div id="navbar" class="navbar-collapse collapse">
+                <div id="navbar" class="navbar-collapse collapse" ng-init='user =<?php print(json_encode($this->data['user'])); ?>'>
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="#">Dashboard</a></li>
                         <li><a href="#">Settings</a></li>
                         <li class="dropdown">
-                            <a href="#" data-toggle="dropdown" title="<?php print_r($this->data['user']); ?>">Profile</a>
+                            <a href="#" data-toggle="dropdown" title='{{user.username}}' >Profile</a>
                             <ul class="dropdown-menu">
+                                <li><a href="account/changepassword"><i class="glyphicon glyphicon-wrench"></i>&nbsp;Change Password</a></li>
                                 <li><a href="account/logout"><i class="glyphicon glyphicon-log-out"></i>&nbsp;Logout</a></li>
                             </ul>
                         </li>
@@ -74,36 +75,36 @@ and open the template in the editor.
                     </ul>
                 </div>
                 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" ng-controller="mainController">
-                    <h1 class="page-header">Dashboard {{4 + 5}}</h1>
+                    <h1 class="page-header">Dashboard <span ng-bind="4 + 5"></span></h1>
 
                     <div class="row placeholders">
                         <div class="col-xs-6 col-sm-3 placeholder">
                             <i class="glyphicon glyphicon-th" style="font-size: 100px"></i> 
                             <!--<img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">-->
                             <h4>Projects</h4>
-                            <span class="text-muted">{{data.projects.length}}</span>
+                            <span class="text-muted"><span ng-bind="data.projects.length"></span></span>
                         </div>
                         <div class="col-xs-6 col-sm-3 placeholder">
                             <i class="glyphicon glyphicon-list" style="font-size: 100px"></i> 
                             <!--<img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">-->
                             <h4>Issues</h4>
-                            <span class="text-muted">{{data.projects.issues.length}}</span>
+                            <span class="text-muted"><span ng-bind="data.projects.issues.length"></span></span>
                         </div>
                         <div class="col-xs-6 col-sm-3 placeholder">
-<i class="glyphicon glyphicon-user" style="font-size: 100px"></i>                             
-<!--<img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">-->
+                            <i class="glyphicon glyphicon-user" style="font-size: 100px"></i>                             
+                            <!--<img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">-->
                             <h4>Users</h4>
-                            <span class="text-muted">{{data.users.length}}</span>
+                            <span class="text-muted"><span ng-bind="data.users.length"></span></span>
                         </div>
                         <div class="col-xs-6 col-sm-3 placeholder" >
                             <i class="glyphicon glyphicon-dashboard" style="font-size: 100px"></i>                            
 <!--<img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">-->
-                            <h4>Label</h4>
-                            <span class="text-muted">Something else</span>
+                            <h4>All</h4>
+                            <span class="text-muted"><span ng-bind="data.length"></span></span>
                         </div>
                     </div>
 
-                    <h2 class="sub-header">{{title}}</h2>
+                    <h2 class="sub-header" ><span ng-bind="title"></span></h2>
                     <div class="table-responsive">
                         <table class="table table-striped">
                             <thead>
@@ -117,17 +118,17 @@ and open the template in the editor.
                             </thead>
                             <tbody>
                                 <tr ng-repeat="project in data.projects">
-                                    <td>{{project.id}}</td>
-                                    <td>{{project.name}}</td>
-                                    <td>{{project.description}}</td>
-                                    <td>{{project.issues.length}}</td>
-                                    <td>{{project.modifieddate}}</td>
+                                    <td><span ng-bind="project.id"></span></td>
+                                    <td><span ng-bind="project.name"></span></td>
+                                    <td><span ng-bind="project.description"></span></td>
+                                    <td><span ng-bind="project.issues.length"></span></td>
+                                    <td><span ng-bind="project.modifieddate | date:'MM/dd/yyyy'"></span></td>
                                 </tr>
-                    
+
                             </tbody>
                         </table>
                         <ul class="pagination">
-                            <li><a href="#"><i class="glyphicon glyphicon-menu-left"></i></a></li>
+                            <li class="disabled"><a href="#"><i class="glyphicon glyphicon-menu-left"></i></a></li>
                             <li><a href="#">1</a></li>
                             <li><a href="#">2</a></li>
                             <li><a href="#">3</a></li>
