@@ -56,19 +56,17 @@ and open the template in the editor.
             <div class="row">
                 <div class="col-sm-3 col-md-2 sidebar">
                     <ul class="nav nav-sidebar">
-                        <li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>
+                        <li class="active"><a href="#">Overview </a></li>
                         <li><a href="#">Reports</a></li>
                         <li><a href="#">Analytics</a></li>
                         <li><a href="#">Export</a></li>
                     </ul>
-                    <ul class="nav nav-sidebar">
-                        <li><a href="">Nav item</a></li>
-                        <li><a href="">Nav item again</a></li>
-                        <li><a href="">One more nav</a></li>
-                        <li><a href="">Another nav item</a></li>
-                        <li><a href="">More navigation</a></li>
+                    <ul class="nav nav-sidebar" >
+                       <li><a href="#/project">Projects</a></li>
+                        <li><a href="#/issue">Issues</a></li>
+                        <li><a href="#/user">Users</a></li>
                     </ul>
-                    <ul class="nav nav-sidebar">
+                    <ul class="nav nav-sidebar" ng-hide='true'>
                         <li><a href="">Nav item again</a></li>
                         <li><a href="">One more nav</a></li>
                         <li><a href="">Another nav item</a></li>
@@ -88,7 +86,7 @@ and open the template in the editor.
                             <i class="glyphicon glyphicon-list" style="font-size: 100px"></i> 
                             <!--<img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">-->
                             <h4>Issues</h4>
-                            <span class="text-muted"><span ng-bind="data.projects.issues.length"></span></span>
+                            <span class="text-muted"><span ng-bind="projectIssues()"></span></span>
                         </div>
                         <div class="col-xs-6 col-sm-3 placeholder">
                             <i class="glyphicon glyphicon-user" style="font-size: 100px"></i>                             
@@ -109,11 +107,12 @@ and open the template in the editor.
                         <table class="table table-striped">
                             <thead>
                                 <tr>
-                                    <th>#</th>
-                                    <th>Project Name</th>
-                                    <th>Description</th>
-                                    <th>Issues</th>
-                                    <th>Modified Date</th>
+                                    <th><span ng-bind="'#'"></span></th>
+                                    <th><span ng-bind="'Project Name'"></span></th>
+                                    <th><span ng-bind="'Description'"></span></th>
+                                    <th><span ng-bind="'Issues'"></span></th>
+                                    <th><span ng-bind="'Modified Date'"></span></th>
+                                    <th>&nbsp;</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -121,12 +120,14 @@ and open the template in the editor.
                                     <td><span ng-bind="project.id"></span></td>
                                     <td><span ng-bind="project.name"></span></td>
                                     <td><span ng-bind="project.description"></span></td>
-                                    <td><span ng-bind="project.issues.length"></span></td>
-                                    <td><span ng-bind="project.modifieddate | date:'MM/dd/yyyy'"></span></td>
+                                    <td><span class="badge" ng-bind="project.issues.length"></span></td>
+                                    <td><span ng-bind="project.modifieddate | date:'mmmm dd, yyyy'"></span></td>
+                                    <td><a href="#/edit/{{project.id}}"><span class="glyphicon glyphicon-edit" ng-bind="'Edit'"></span></a>&nbsp;<a href="#/details/{{project.id}}"><span class="glyphicon glyphicon-list" ng-bind="'Details'"></span></a></td>
                                 </tr>
 
                             </tbody>
                         </table>
+                        <ng-view></ng-view>
                         <ul class="pagination">
                             <li class="disabled"><a href="#"><i class="glyphicon glyphicon-menu-left"></i></a></li>
                             <li><a href="#">1</a></li>
