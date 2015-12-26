@@ -45,9 +45,9 @@ class Index extends Controller {
             'app/webroot/bootstrap/js/bootstrap.min.js',
             'app/views/index/js/holder.js');
         echo "<!--" . strtoupper("Welcome to " . $this->view->data['cfg']->title) . "-->\n";
-        //$this->view->render("header");
+        $this->view->render("header");
         $this->view->render("index/index");
-        //$this->view->render("footer");
+        $this->view->render("footer");
     }
 
     function get($id = 0) {
@@ -62,12 +62,12 @@ class Index extends Controller {
                             array(
                                 'id' => '1',
                                 'description' =>
-                                'yesterday',
+                                'yesterday is today',
                                 'status' => 'sugar'),
                             array(
                                 'id' => '4',
                                 'description' =>
-                                'yesterday',
+                                'today is yesterday',
                                 'status' => 'sugar')
                         ),
                         'modifieddate' => '12/09/2015'
@@ -80,7 +80,7 @@ class Index extends Controller {
                             array(
                                 'id' => '2',
                                 'description' =>
-                                'yesterday',
+                                'today is yesterday',
                                 'status' => 'sugar')
                         ),
                         'modifieddate' => '02/09/2015'
@@ -92,7 +92,7 @@ class Index extends Controller {
                         'issues' => array(
                             array(
                                 'id' => '3',
-                                'description' => 'yesterday',
+                                'description' => 'tomorrow is yesterday',
                                 'status' => 'sugar')
                             ),
                         'modifieddate' => '03/05/2015'

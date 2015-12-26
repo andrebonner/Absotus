@@ -1,6 +1,7 @@
 
-app.controller('mainController', function ($scope, $http) {
+app.controller('mainController', function ($scope, $http, $routeParams) {
     $scope.title = "Featured Projects";
+    
     $http.get("index/get").success(function(data) {
         $scope.data = data.dashboard;
 
@@ -12,4 +13,6 @@ app.controller('mainController', function ($scope, $http) {
             return $scope.num;
         };
     });
+    $scope.edit_id = $routeParams.edit_id;
+    $scope.details_id = $routeParams.details_id-1;
 });
