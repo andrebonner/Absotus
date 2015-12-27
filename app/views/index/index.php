@@ -45,7 +45,7 @@
             <tbody>
                 <tr ng-repeat="project in data.projects">
                     <td><span ng-bind="project.id"></span></td>
-                    <td><a href="<?php echo $this->data['cfg']->url; ?>#/details/{{project.id}}"><span ng-bind="project.name"></span></a></td>
+                    <td><a href="<?php echo $this->data['cfg']->url; ?>#/project/details/{{project.id}}"><span ng-bind="project.name"></span></a></td>
                     <td><span ng-bind="project.description"></span></td>
                     <td><span class="badge" ng-bind="project.issues.length"></span></td>
                     <td><span ng-bind="project.modifieddate | date:'mmmm dd, yyyy'"></span></td>
@@ -56,14 +56,6 @@
         </table>
         <ng-view></ng-view>
         <a href="project">View All Projects</a>
-        <!--                        
-        <ul class="pagination">
-            <li class="disabled"><a href="#"><i class="glyphicon glyphicon-menu-left"></i></a></li>
-            <li><a href="#">1</a></li>
-            <li><a href="#">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#"><i class="glyphicon glyphicon-menu-right"></i></a></li>
-        </ul>
-        -->
+
     </div>
 </div>

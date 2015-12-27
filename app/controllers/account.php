@@ -36,7 +36,10 @@ class Account extends Controller {
         global $REG;
         $cfg = $REG;
         $this->view->title = 'Login';
-        $this->view->data = array('description' => 'This page is the index', 'cfg' => $this->cfg, 'error' => $data);
+        $this->view->data = array(
+            'description' => 'This page is the index', 
+            'cfg' => $this->cfg, 
+            'error' => $data);
         $this->view->css = array(
             'app/webroot/bootstrap/css/bootstrap.min.css',
             'app/webroot/toastr/css/toastr.css',
@@ -60,7 +63,10 @@ class Account extends Controller {
         $cfg = $REG;
         
         $this->view->title = 'Change Password';
-        $this->view->data = array('description' => 'This page is the change password', 'cfg' => $this->cfg, 'error' => $data);
+        $this->view->data = array(
+            'description' => 'This page is the change password', 
+            'cfg' => $this->cfg, 
+            'error' => $data);
         $this->view->css = array(
             'app/webroot/bootstrap/css/bootstrap.min.css',
             'app/webroot/toastr/css/toastr.css',

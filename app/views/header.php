@@ -33,8 +33,8 @@ and open the template in the editor.
                 </div>
                 <div id="navbar" class="navbar-collapse collapse" ng-init='user =<?php print(json_encode($this->data['user'])); ?>'>
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="#">Dashboard</a></li>
-                        <li><a href="#">Settings</a></li>
+                        <li><a href="<?php echo $this->data['cfg']->url; ?>">Dashboard</a></li>
+                        <li><a href="#/settings">Settings</a></li>
                         <li class="dropdown">
                             <a href="#" data-toggle="dropdown" title='{{user.username}}' >Profile</a>
                             <ul class="dropdown-menu">
@@ -43,10 +43,10 @@ and open the template in the editor.
                             </ul>
                         </li>
 
-                        <li><a href="#">Help</a></li>
+                        <li><a href="#/help">Help</a></li>
                     </ul>
                     <form class="navbar-form navbar-right">
-                        <input type="text" class="form-control" placeholder="Search...">
+                        <input type="text" class="form-control" placeholder="Search..." ng-model="search" />
                     </form>
                 </div>
             </div>
@@ -54,8 +54,8 @@ and open the template in the editor.
 
         <div class="container-fluid">
             <div class="row">
-                <div class="col-sm-3 col-md-2 sidebar">
-                    <ul class="nav nav-sidebar">
+                <div class="col-sm-3 col-md-2 sidebar" ng-controller="menuController">
+                    <!--<ul class="nav nav-sidebar">
                         <li class="active"><a href="#">Overview </a></li>
                         <li><a href="#">Reports</a></li>
                         <li><a href="#">Analytics</a></li>
@@ -65,10 +65,11 @@ and open the template in the editor.
                        <li><a href="#/project">Projects</a></li>
                         <li><a href="#/issue">Issues</a></li>
                         <li><a href="#/user">Users</a></li>
+                    </ul>-->
+                    <ul class="nav nav-sidebar" >
+                        <li ng-repeat="m in navside | filter: search"><a href="{{m.url}}"><span ng-bind="m.title"></span></a></li>
                     </ul>
-                    <ul class="nav nav-sidebar" ng-hide='true'>
-                        <li><a href="">Nav item again</a></li>
-                        <li><a href="">One more nav</a></li>
-                        <li><a href="">Another nav item</a></li>
+                    <ul class="nav nav-sidebar" >
+                        <li ng-repeat="m in menu | filter: search"><a href="{{m.url}}"><span ng-bind="m.title"></span></a></li>
                     </ul>
                 </div>

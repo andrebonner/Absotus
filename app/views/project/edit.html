@@ -1,0 +1,22 @@
+<form >
+<div class="form-horizontal">
+    <h4>Project #{{data.projects[edit_id].id}}</h4>
+    <div class="form-group">
+        <label for="name" class="control-label col-md-2">Project Name</label>
+        <div class="col-md-10">
+            <input name="name" value="{{data.projects[edit_id].name}}"/>
+        </div>
+    </div>
+    <div class="form-group">
+         <label for="description" class="control-label col-md-2">Description</label>
+        <div class="col-md-10">
+            <textarea name="description" >{{data.projects[edit_id].description}}</textarea>
+        </div>
+    </div>
+    <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+</div>
+</form>

@@ -7,54 +7,26 @@
  */
 
 /**
- * Description of index
+ * Description of project_model
  *
  * @author Andre Bonner <andre.s.bonner@gmail.com>
  */
-class Index extends Controller {
+class Project_Model extends Model {
 
-    public $cfg;
+    private $_setting;
 
-    function __construct() {
-        parent::__construct();
-        //print "Index Page";
-        Session::init();
-        $logged = Session::get('loggedIn');
-        if (!$logged) {
-            header("Location: ./account/login", true);
-            die();
-        }
-    }
-
-    function index() {
+    public function __construct() {
         global $REG;
-        $cfg = $REG;
-
-        $this->view->title = 'Dashboard';
-        $this->view->data = array(
-            'description' => 'This page is the index',
-            'cfg' => $this->cfg,
-            'user' => Session::get('user'));
-        $this->view->css = array(
-            'app/webroot/bootstrap/css/bootstrap.min.css',
-            'app/views/index/css/dashboard.css');
-        //$this->view->css = array('/index/css/carousel.css');
-        $this->view->js = array(
-            'app/webroot/bootstrap/js/jquery.min.js',
-            'app/webroot/angular/angular.min.js',
-            'app/webroot/angular/angular-route.min.js',
-            'app/views/index/js/dashboardApp.js',
-            'app/views/index/js/mainCtrl.js',
-            'app/webroot/bootstrap/js/bootstrap.min.js',
-            'app/views/index/js/holder.js');
-        echo "<!--" . strtoupper("Welcome to " . $this->view->data['cfg']->title) . "-->\n";
-        $this->view->render("header");
-        $this->view->render("index/index");
-        $this->view->render("footer");
+        $this->_setting = $REG;
+        //print 111;
+        parent::__construct();
     }
-
-    function get($id = 0) {
-        $dashboard = array(
+    
+     public function projects() {
+        global $REG;
+        $this->_setting = $REG;
+     
+        return json_encode(array(
             'dashboard' => array(
                 'projects' => array(
                     array(
@@ -97,17 +69,30 @@ class Index extends Controller {
                                 'id' => '3',
                                 'description' => 'tomorrow is yesterday',
                                 'status' => 'sugar')
-                        ),
+                            ),
                         'modifieddate' => '03/05/2015'
-                    ),
+                        ),
                 ),
                 'users' => array(
                     'frencch',
                     'spanish',
-                    'english')
+                    'english'),
+                'menus' => array(
+                    array(
+                        'title' => 'Projects',
+                        'url' => '/project'
+                    ),
+                    array(
+                        'title' => 'Issues',
+                        'url' => '/issues'
+                    ),
+                    array(
+                        'title' => 'Users',
+                        'url' => '/user'
+                    )
+                )
             )
-        );
-        echo json_encode($dashboard);
-    }
+        ));
+     }
 
 }
