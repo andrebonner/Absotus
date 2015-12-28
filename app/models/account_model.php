@@ -49,9 +49,9 @@ class Account_Model extends Model {
             $sth->bindValue(':oldpassword', $user['password']);
             $res = $sth->execute();
             if ($res) {
-                header('location: ../index.php', true);
+                header('location: ../account/changepasswordconfirmation');
                 die();
-            }else{
+            } else {
                 return 'Password could not be changed';
             }
         } catch (Exception $e) {
@@ -80,7 +80,7 @@ class Account_Model extends Model {
             print_r($postf);
             print $password = Hash::create('md5', $postf['password'], $this->_setting->hash_pass_key);
             print "</pre>";
-            
+
             $sth = $this->db->prepare("SELECT a.id, a.username, a.email, a.password, c.role FROM users a INNER JOIN user_roles b ON b.user_id = a.id INNER JOIN roles c ON b.user_role = c.id WHERE a.username =:username AND a.password =:password");
             $sth->bindValue(':username', $postf['email']);
             $sth->bindValue(':password', $password);
@@ -98,7 +98,7 @@ class Account_Model extends Model {
                 if (isset($postf['remember'])) {
                     setcookie('absotus_user', $data, time() + (86400 * 30), "/");
                 }
-                header('location: ../index.php', true);
+                header('location: ../login');
                 die();
             } else {
                 return 'Login could not be processed';
@@ -106,6 +106,65 @@ class Account_Model extends Model {
         } catch (Exception $e) {
             return $e->getMessage();
         }
+    }
+
+    function verifycode() {
+        global $REG;
+        $this->_setting = $REG;
+        try {
+            //print_r($_SERVER); die();
+            $form = new Form();
+
+            $form->post('provider')
+                    ->val('minlength', 3)
+                    ->post('code')
+                    ->val('digit')
+                    ->post('remember')
+                    ->post('rememberBrowser');
+
+            $form->submit();
+            //echo 'Form passed';
+            $postf = $form->fetch();
+
+            
+        } catch (Exception $e) {
+            return $e->getMessage();
+        }
+    }
+
+    function sendcode() {
+        global $REG;
+        $this->_setting = $REG;
+        try {
+            //print_r($_SERVER); die();
+            $form = new Form();
+
+            $form->post('provider')
+                    ->val('minlength', 3)
+                    ->post('remember');
+
+            $form->submit();
+            //echo 'Form passed';
+            $postf = $form->fetch();
+
+            if ($postf['provider'] == "phone") {
+                // send via SMS
+                return 'SMS has been sent';
+            } else {
+                // send
+                return 'Email has been sent';
+            }
+        } catch (Exception $e) {
+            return $e->getMessage();
+        }
+    }
+
+    function confirmemail() {
+        
+    }
+
+    function forgotpassword() {
+        
     }
 
 }

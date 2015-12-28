@@ -39,7 +39,6 @@
                     <th><span ng-bind="'Description'"></span></th>
                     <th><span ng-bind="'Issues'"></span></th>
                     <th><span ng-bind="'Modified Date'"></span></th>
-
                 </tr>
             </thead>
             <tbody>
@@ -49,9 +48,7 @@
                     <td><span ng-bind="project.description"></span></td>
                     <td><span class="badge" ng-bind="project.issues.length"></span></td>
                     <td><span ng-bind="project.modifieddate | date:'mmmm dd, yyyy'"></span></td>
-
                 </tr>
-
             </tbody>
         </table>
         <ng-view></ng-view>

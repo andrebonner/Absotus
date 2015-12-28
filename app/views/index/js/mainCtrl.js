@@ -2,7 +2,7 @@
 app.controller('mainController', function ($scope, $http, $routeParams) {
     $scope.title = "Featured Projects";
     
-    $http.get("project/get").success(function(data) {
+    $http.get("index/get").success(function(data) {
         $scope.data = data.dashboard;
 
         $scope.projectIssues = function () {

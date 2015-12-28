@@ -21,7 +21,8 @@ class Account extends Controller {
         Session::init();
 //        $logged = Session::get('loggedIn');
 //        if (!$logged) {
-//            header("location: ./account/login");
+//            //die('Account');
+//            header("location: ../account/login", true);
 //            die();
 //        }
     }
@@ -31,14 +32,22 @@ class Account extends Controller {
     }
 
     function login() {
-        if($_SERVER['REQUEST_METHOD']=='POST') $data = $this->model->login();
+        $logged = Session::get('loggedIn');
+        if ($logged) {
+            //die('Login');
+            header("location: ../index.php");
+            die();
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST')
+            $data = $this->model->login();
 
         global $REG;
         $cfg = $REG;
         $this->view->title = 'Login';
         $this->view->data = array(
-            'description' => 'This page is the index', 
-            'cfg' => $this->cfg, 
+            'description' => 'This page is the index',
+            'cfg' => $this->cfg,
             'error' => $data);
         $this->view->css = array(
             'app/webroot/bootstrap/css/bootstrap.min.css',
@@ -51,21 +60,28 @@ class Account extends Controller {
             'app/webroot/toastr/js/toastr.js',
             'app/views/account/js/login.js');
         //echo "<!--" . strtoupper("Welcome to " . $this->view->data['cfg']->title) . "-->\n";
-        $this->view->render("account/header");
+        $this->view->render("account/_header");
         $this->view->render("account/login");
-        $this->view->render("account/footer");
+        $this->view->render("account/_footer");
     }
 
-    function changepassword() {
-        if($_SERVER['REQUEST_METHOD']=='POST') $data = $this->model->changepassword();
+    function changepasswordconfirmation() {
+        $logged = Session::get('loggedIn');
+        if (!$logged) {
+            //die('Account');
+            header("location: ../account/login", true);
+            die();
+        }
+        if ($_SERVER['REQUEST_METHOD'] == 'POST')
+            $data = $this->model->changepassword();
 
         global $REG;
         $cfg = $REG;
-        
-        $this->view->title = 'Change Password';
+
+        $this->view->title = 'Change password confirmation';
         $this->view->data = array(
-            'description' => 'This page is the change password', 
-            'cfg' => $this->cfg, 
+            'description' => 'This page is the change password confirmation',
+            'cfg' => $this->cfg,
             'error' => $data);
         $this->view->css = array(
             'app/webroot/bootstrap/css/bootstrap.min.css',
@@ -78,30 +94,213 @@ class Account extends Controller {
             'app/webroot/toastr/js/toastr.js',
             'app/views/account/js/changepassword.js');
         //echo "<!--" . strtoupper("Welcome to " . $this->view->data['cfg']->title) . "-->\n";
-        $this->view->render("account/header");
+        $this->view->render("account/_header");
+        $this->view->render("account/changepasswordconfirmation");
+        $this->view->render("account/_footer");
+    }
+
+    function changepassword() {
+        $logged = Session::get('loggedIn');
+        if (!$logged) {
+            //die('Account');
+            header("location: ../account/login", true);
+            die();
+        }
+        if ($_SERVER['REQUEST_METHOD'] == 'POST')
+            $data = $this->model->changepassword();
+
+        global $REG;
+        $cfg = $REG;
+
+        $this->view->title = 'Change Password';
+        $this->view->data = array(
+            'description' => 'This page is the change password',
+            'cfg' => $this->cfg,
+            'error' => $data);
+        $this->view->css = array(
+            'app/webroot/bootstrap/css/bootstrap.min.css',
+            'app/webroot/toastr/css/toastr.css',
+            'app/views/account/css/login-template.css');
+        //$this->view->css = array('/index/css/carousel.css');
+        $this->view->js = array(
+            'app/webroot/bootstrap/js/jquery.min.js',
+            'app/webroot/bootstrap/js/bootstrap.min.js',
+            'app/webroot/toastr/js/toastr.js',
+            'app/views/account/js/changepassword.js');
+        //echo "<!--" . strtoupper("Welcome to " . $this->view->data['cfg']->title) . "-->\n";
+        $this->view->render("account/_header");
         $this->view->render("account/changepassword");
-        $this->view->render("account/footer");
+        $this->view->render("account/_footer");
     }
 
     function verifycode() {
-        
+        $logged = Session::get('loggedIn');
+        if (!$logged) {
+            //die('Account');
+            header("location: ../account/login", true);
+            die();
+        }
+        if ($_SERVER['REQUEST_METHOD'] == 'POST')
+            $data = $this->model->verifycode();
+
+        global $REG;
+        $cfg = $REG;
+        $this->view->title = 'Verify Code';
+        $this->view->data = array(
+            'description' => 'This page is the verify code',
+            'cfg' => $this->cfg,
+            'error' => $data);
+        $this->view->css = array(
+            'app/webroot/bootstrap/css/bootstrap.min.css',
+            'app/webroot/toastr/css/toastr.css',
+            'app/views/account/css/login-template.css');
+        //$this->view->css = array('/index/css/carousel.css');
+        $this->view->js = array(
+            'app/webroot/bootstrap/js/jquery.min.js',
+            'app/webroot/bootstrap/js/bootstrap.min.js',
+            'app/webroot/toastr/js/toastr.js',
+            'app/views/account/js/login.js');
+        //echo "<!--" . strtoupper("Welcome to " . $this->view->data['cfg']->title) . "-->\n";
+        $this->view->render("account/_header");
+        $this->view->render("account/verifycode");
+        $this->view->render("account/_footer");
     }
 
     function sendcode() {
-        
+
+        $logged = Session::get('loggedIn');
+        if (!$logged) {
+            //die('Account');
+            header("location: ../account/login", true);
+            die();
+        }
+        if ($_SERVER['REQUEST_METHOD'] == 'POST')
+            $data = $this->model->sendcode();
+
+        global $REG;
+        $cfg = $REG;
+        $this->view->title = 'Send Code';
+        $this->view->data = array(
+            'description' => 'This page is the send code',
+            'cfg' => $this->cfg,
+            'error' => $data);
+        $this->view->css = array(
+            'app/webroot/bootstrap/css/bootstrap.min.css',
+            'app/webroot/toastr/css/toastr.css',
+            'app/views/account/css/login-template.css');
+        //$this->view->css = array('/index/css/carousel.css');
+        $this->view->js = array(
+            'app/webroot/bootstrap/js/jquery.min.js',
+            'app/webroot/bootstrap/js/bootstrap.min.js',
+            'app/webroot/toastr/js/toastr.js',
+            'app/views/account/js/login.js');
+        //echo "<!--" . strtoupper("Welcome to " . $this->view->data['cfg']->title) . "-->\n";
+        $this->view->render("account/_header");
+        $this->view->render("account/sendcode");
+        $this->view->render("account/_footer");
     }
 
     function confirmemail() {
-        
+        $logged = Session::get('loggedIn');
+        if (!$logged) {
+            //die('Account');
+            header("location: ../account/login", true);
+            die();
+        }
+        if ($_SERVER['REQUEST_METHOD'] == 'POST')
+            $data = $this->model->confirmemail();
+
+        global $REG;
+        $cfg = $REG;
+        $this->view->title = 'Confirm Email';
+        $this->view->data = array(
+            'description' => 'This page is the confirm email',
+            'cfg' => $this->cfg,
+            'error' => $data);
+        $this->view->css = array(
+            'app/webroot/bootstrap/css/bootstrap.min.css',
+            'app/webroot/toastr/css/toastr.css',
+            'app/views/account/css/login-template.css');
+        //$this->view->css = array('/index/css/carousel.css');
+        $this->view->js = array(
+            'app/webroot/bootstrap/js/jquery.min.js',
+            'app/webroot/bootstrap/js/bootstrap.min.js',
+            'app/webroot/toastr/js/toastr.js',
+            'app/views/account/js/login.js');
+        //echo "<!--" . strtoupper("Welcome to " . $this->view->data['cfg']->title) . "-->\n";
+        $this->view->render("account/_header");
+        $this->view->render("account/confirmemail");
+        $this->view->render("account/_footer");
+    }
+
+    function forgotpasswordconfirmation() {
+        $logged = Session::get('loggedIn');
+        if (!$logged) {
+            //die('Account');
+            header("location: ../account/login", true);
+            die();
+        }
+        $data = $this->model->forgotpassword();
+
+        global $REG;
+        $cfg = $REG;
+        $this->view->title = 'Forgot Password Confirmation';
+        $this->view->data = array(
+            'description' => 'This page is the forgot password confirmation',
+            'cfg' => $this->cfg,
+            'error' => $data);
+        $this->view->css = array(
+            'app/webroot/bootstrap/css/bootstrap.min.css',
+            'app/webroot/toastr/css/toastr.css',
+            'app/views/account/css/login-template.css');
+        //$this->view->css = array('/index/css/carousel.css');
+        $this->view->js = array(
+            'app/webroot/bootstrap/js/jquery.min.js',
+            'app/webroot/bootstrap/js/bootstrap.min.js',
+            'app/webroot/toastr/js/toastr.js',
+            'app/views/account/js/login.js');
+        //echo "<!--" . strtoupper("Welcome to " . $this->view->data['cfg']->title) . "-->\n";
+        $this->view->render("account/_header");
+        $this->view->render("account/forgotpasswordconfirmation");
+        $this->view->render("account/_footer");
     }
 
     function forgotpassword() {
-        
+        $logged = Session::get('loggedIn');
+        if (!$logged) {
+            //die('Account');
+            header("location: ../account/login", true);
+            die();
+        }
+        if ($_SERVER['REQUEST_METHOD'] == 'POST')
+            $data = $this->model->forgotpassword();
+
+        global $REG;
+        $cfg = $REG;
+        $this->view->title = 'Forgot Password';
+        $this->view->data = array(
+            'description' => 'This page is the forgot password',
+            'cfg' => $this->cfg,
+            'error' => $data);
+        $this->view->css = array(
+            'app/webroot/bootstrap/css/bootstrap.min.css',
+            'app/webroot/toastr/css/toastr.css',
+            'app/views/account/css/login-template.css');
+        //$this->view->css = array('/index/css/carousel.css');
+        $this->view->js = array(
+            'app/webroot/bootstrap/js/jquery.min.js',
+            'app/webroot/bootstrap/js/bootstrap.min.js',
+            'app/webroot/toastr/js/toastr.js',
+            'app/views/account/js/login.js');
+        //echo "<!--" . strtoupper("Welcome to " . $this->view->data['cfg']->title) . "-->\n";
+        $this->view->render("account/_header");
+        $this->view->render("account/forgotpassword");
+        $this->view->render("account/_footer");
     }
 
     function logout() {
         Session::destroy();
-        header("location: ../index.php");
+        header('location: ../index.php');
     }
 
 }

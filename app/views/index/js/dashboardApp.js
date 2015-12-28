@@ -38,19 +38,19 @@ var app = angular.module('dashboard', ['ngRoute'])
             $scope.navside = [
                 {
                     "title": "Overview",
-                    "url": "/"
+                    "url": "#/"
                 },
                 {
                     "title": "Reports",
-                    "url": "/"
+                    "url": "#/"
                 },
                 {
                     "title": "Analytics",
-                    "url": "/"
+                    "url": "#/"
                 },
                 {
                     "title": "Export",
-                    "url": "/"
+                    "url": "#/"
                 }
             ];
         });

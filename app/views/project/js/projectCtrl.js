@@ -27,6 +27,10 @@ var projects = app.controller('projectController', function ($scope, $http, $rou
                             templateUrl: 'app/views/project/delete.html',
                             controller: 'projectController'
                         }).
+                        when('/create', {
+                            templateUrl: 'app/views/project/create.html',
+                            controller: 'projectController'
+                        }).
                         otherwise({
                             redirectTo: '/'
                         });

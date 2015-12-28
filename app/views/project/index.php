@@ -1,7 +1,7 @@
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" ng-controller="projectController">
     <h1 class="page-header">Dashboard <span ng-bind="'-'"></span></h1>
     <ng-view></ng-view>
-    <a href="project/create">Add a Project</a>
+    <a href="#/create">Add a Project</a>
     <h2 class="sub-header" ><span ng-bind="'Projects'"></span></h2>
     <div class="table-responsive">
         <table class="table table-striped">
@@ -21,7 +21,7 @@
                     <td><a href="<?php echo $this->data['cfg']->url; ?>#/details/{{project.id}}"><span ng-bind="project.name"></span></a></td>
                     <td><span ng-bind="project.description"></span></td>
                     
-                    <td><span ng-bind="project.modifieddate | date:'mmmm dd, yyyy'"></span></td>
+                    <td><span ng-bind="project.modifieddate | date:'EEEE, MMMM d, y'"></span></td>
                     <td><a href="#/edit/{{project.id}}"><span ng-bind="'Edit'"></span></a>&nbsp;<span ng-bind="'|'"></span>&nbsp;<a href="#/details/{{project.id}}"><span ng-bind="'Details'"></span></a>&nbsp;<span ng-bind="'|'"></span>&nbsp;<a href="#/delete/{{project.id}}"><span ng-bind="'Delete'"></span></a></td>
                 </tr>
 

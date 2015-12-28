@@ -21,11 +21,11 @@ class Project_Model extends Model {
         //print 111;
         parent::__construct();
     }
-    
-     public function projects() {
+
+    public function projects() {
         global $REG;
         $this->_setting = $REG;
-     
+
         return json_encode(array(
             'dashboard' => array(
                 'projects' => array(
@@ -69,9 +69,9 @@ class Project_Model extends Model {
                                 'id' => '3',
                                 'description' => 'tomorrow is yesterday',
                                 'status' => 'sugar')
-                            ),
-                        'modifieddate' => '03/05/2015'
                         ),
+                        'modifieddate' => '03/05/2015'
+                    ),
                 ),
                 'users' => array(
                     'frencch',
@@ -93,6 +93,17 @@ class Project_Model extends Model {
                 )
             )
         ));
-     }
+    }
 
+    function create() {
+        
+    }
+
+    function delete() {
+        
+    }
+
+    function edit() {
+        
+    }
 }

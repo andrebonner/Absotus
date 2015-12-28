@@ -38,15 +38,14 @@ class Project extends Controller {
         $this->view->css = array(
             'app/webroot/bootstrap/css/bootstrap.min.css',
             'app/views/index/css/dashboard.css');
-        //$this->view->css = array('/index/css/carousel.css');
+        
         $this->view->js = array(
             'app/webroot/bootstrap/js/jquery.min.js',
             'app/webroot/angular/angular.min.js',
             'app/webroot/angular/angular-route.min.js',
             'app/views/index/js/dashboardApp.js',
             'app/views/project/js/projectCtrl.js',
-            'app/webroot/bootstrap/js/bootstrap.min.js',
-            'app/views/index/js/holder.js');
+            'app/webroot/bootstrap/js/bootstrap.min.js');
         echo "<!--" . strtoupper("Welcome to " . $this->view->data['cfg']->title) . "-->\n";
         $this->view->render("header");
         $this->view->render("project/index");
@@ -60,6 +59,14 @@ class Project extends Controller {
     
     function create(){
         
+    }
+    
+    function delete(){
+        
+    }
+    
+    function edit(){
+        if($_SERVER['REQUEST_METHOD']=='POST') $res=$this->model->edit();
     }
 
 }

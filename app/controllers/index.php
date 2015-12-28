@@ -21,7 +21,8 @@ class Index extends Controller {
         Session::init();
         $logged = Session::get('loggedIn');
         if (!$logged) {
-            header("Location: ./account/login", true);
+            //die('Index');
+            header("location: account/login", false);
             die();
         }
     }
@@ -38,7 +39,6 @@ class Index extends Controller {
         $this->view->css = array(
             'app/webroot/bootstrap/css/bootstrap.min.css',
             'app/views/index/css/dashboard.css');
-        //$this->view->css = array('/index/css/carousel.css');
         $this->view->js = array(
             'app/webroot/bootstrap/js/jquery.min.js',
             'app/webroot/angular/angular.min.js',
