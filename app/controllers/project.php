@@ -18,12 +18,7 @@ class Project extends Controller {
     function __construct() {
         parent::__construct();
         //print "Index Page";
-        Session::init();
-        $logged = Session::get('loggedIn');
-        if (!$logged) {
-            header("Location: ./account/login",true);
-            die();
-        }
+        Auth::handleLogin();
     }
 
     function index() {

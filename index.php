@@ -37,7 +37,10 @@
 
 # for debug purposes
 //error_reporting(!E_NOTICE && E_ALL);
-ini_set('display_errors', 'On');
+ini_set('display_errors', 'Off');
+# error log
+ini_set('log_errors', 'On');
+ini_set('error_log', 'app/logs/absotus.log');
 
 # install config if not found
 # needs some work ;-)

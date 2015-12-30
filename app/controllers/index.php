@@ -18,13 +18,7 @@ class Index extends Controller {
     function __construct() {
         parent::__construct();
         //print "Index Page";
-        Session::init();
-        $logged = Session::get('loggedIn');
-        if (!$logged) {
-            //die('Index');
-            header("location: account/login", false);
-            die();
-        }
+        Auth::handleLogin();
     }
 
     function index() {

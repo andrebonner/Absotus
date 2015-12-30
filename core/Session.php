@@ -41,7 +41,7 @@ class Session {
     }
 
     public static function set($key, $value) {
-        @session_start();
+        session_start();
         $_SESSION[$key] = $value;
     }
 
@@ -52,8 +52,8 @@ class Session {
 
     public static function destroy() {
         
-        unset($_SESSION['user']);
-        unset($_SESSION['loggedIn']);
+//        unset($_SESSION['user']);
+//        unset($_SESSION['loggedIn']);
         session_unset();
         session_destroy();
         $_SESSION = array();

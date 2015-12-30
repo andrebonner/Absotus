@@ -37,12 +37,16 @@ class Account_Model extends Model {
             $form->submit();
             //echo 'Form passed';
             $postf = $form->fetch();
-            //print "<pre>";
-            //print_r($postf);
-            print $password = Hash::create('md5', $postf['newpassword'], $this->_setting->hash_pass_key);
-            //print "</pre>";
             Session::init();
             $user = Session::get('user');
+//            print "<pre>";
+//            //print_r($postf);
+//            print $password = Hash::create('md5', $postf['newpassword'], $this->_setting->hash_pass_key);
+//            print('<br>');
+//            print($user['password']);
+//            print "</pre>";
+//            die("UPDATE users SET password =:newpassword WHERE id=:id AND password=:oldpassword");
+            
             $sth = $this->db->prepare("UPDATE users SET password =:newpassword WHERE id=:id AND password=:oldpassword");
             $sth->bindValue(':id', $user['id']);
             $sth->bindValue(':newpassword', $password);
@@ -95,9 +99,7 @@ class Account_Model extends Model {
                 Session::init();
                 Session::set('user', $data);
                 Session::set('loggedIn', true);
-                if (isset($postf['remember'])) {
-                    setcookie('absotus_user', $data, time() + (86400 * 30), "/");
-                }
+                Auth::rememberLogin($postf['remember']);
                 header('location: ../login');
                 die();
             } else {

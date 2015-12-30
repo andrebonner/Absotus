@@ -10,7 +10,9 @@ if(isset($_REQUEST['run'])){
 			->val('minlength',2)
 		  ->post('age')
 			->val('minlength',2)
-		  ->post('gender');
+                        ->val('digit')
+		  ->post('gender')
+                ->post('remember');
 	
 	$form ->submit();
 	echo 'Form passed';
@@ -18,6 +20,7 @@ if(isset($_REQUEST['run'])){
 	
 	echo '<pre>';
 	print_r($data);
+        print 'Remember: '.boolval($data['remember']);
 	echo '</pre>';
 	}catch (Exception $e){
 		echo $e->getMessage();
@@ -31,5 +34,6 @@ if(isset($_REQUEST['run'])){
 		<option value="m">male</option>
 		<option value="f">female</option>
 	</select>
+        <input name="remember" type="checkbox" value="Remember Me">
 	<button type="submit">Submit</button>
 </form>

@@ -12,14 +12,25 @@
  * @author Andre Bonner <andre.s.bonner@gmail.com>
  */
 class Auth {
+
     // handle authentication
-	public static function handleLogin(){
-		@session_start();
-		$logged = $_SESSION['loggedIn'];
-		if($logged == false){
-			session_destroy();
-			header('Location: ../signin');
-			exit;
-		}
-	}
+    public static function handleLogin() {
+        global $REG;
+        $cfg = $REG;
+        Session::init();
+        $logged = Session::get('loggedIn');
+        if (!$logged) {
+            //die('Index');
+            Session::destroy();
+            header('location: ' . $cfg->url . 'account/login', false);
+            exit;
+        }
+    }
+
+    public static function rememberLogin($value) {
+        if (boolval($value)) {
+            setcookie('absotus_user', $data, time() + (86400 * 30), "/");
+        }
+    }
+
 }

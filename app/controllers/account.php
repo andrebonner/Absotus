@@ -18,7 +18,7 @@ class Account extends Controller {
     function __construct() {
         parent::__construct();
         //print "Index Page";
-        Session::init();
+        //Session::init();
 //        $logged = Session::get('loggedIn');
 //        if (!$logged) {
 //            //die('Account');
@@ -66,12 +66,8 @@ class Account extends Controller {
     }
 
     function changepasswordconfirmation() {
-        $logged = Session::get('loggedIn');
-        if (!$logged) {
-            //die('Account');
-            header("location: ../account/login", true);
-            die();
-        }
+        Auth::handleLogin();
+
         if ($_SERVER['REQUEST_METHOD'] == 'POST')
             $data = $this->model->changepassword();
 
@@ -100,12 +96,7 @@ class Account extends Controller {
     }
 
     function changepassword() {
-        $logged = Session::get('loggedIn');
-        if (!$logged) {
-            //die('Account');
-            header("location: ../account/login", true);
-            die();
-        }
+        Auth::handleLogin();
         if ($_SERVER['REQUEST_METHOD'] == 'POST')
             $data = $this->model->changepassword();
 
@@ -134,12 +125,7 @@ class Account extends Controller {
     }
 
     function verifycode() {
-        $logged = Session::get('loggedIn');
-        if (!$logged) {
-            //die('Account');
-            header("location: ../account/login", true);
-            die();
-        }
+        Auth::handleLogin();
         if ($_SERVER['REQUEST_METHOD'] == 'POST')
             $data = $this->model->verifycode();
 
@@ -167,13 +153,7 @@ class Account extends Controller {
     }
 
     function sendcode() {
-
-        $logged = Session::get('loggedIn');
-        if (!$logged) {
-            //die('Account');
-            header("location: ../account/login", true);
-            die();
-        }
+        Auth::handleLogin();
         if ($_SERVER['REQUEST_METHOD'] == 'POST')
             $data = $this->model->sendcode();
 
@@ -201,12 +181,7 @@ class Account extends Controller {
     }
 
     function confirmemail() {
-        $logged = Session::get('loggedIn');
-        if (!$logged) {
-            //die('Account');
-            header("location: ../account/login", true);
-            die();
-        }
+        Auth::handleLogin();
         if ($_SERVER['REQUEST_METHOD'] == 'POST')
             $data = $this->model->confirmemail();
 
@@ -234,12 +209,7 @@ class Account extends Controller {
     }
 
     function forgotpasswordconfirmation() {
-        $logged = Session::get('loggedIn');
-        if (!$logged) {
-            //die('Account');
-            header("location: ../account/login", true);
-            die();
-        }
+        Auth::handleLogin();
         $data = $this->model->forgotpassword();
 
         global $REG;
@@ -266,12 +236,7 @@ class Account extends Controller {
     }
 
     function forgotpassword() {
-        $logged = Session::get('loggedIn');
-        if (!$logged) {
-            //die('Account');
-            header("location: ../account/login", true);
-            die();
-        }
+        Auth::handleLogin();
         if ($_SERVER['REQUEST_METHOD'] == 'POST')
             $data = $this->model->forgotpassword();
 
