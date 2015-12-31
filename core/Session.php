@@ -52,11 +52,13 @@ class Session {
 
     public static function destroy() {
         
-//        unset($_SESSION['user']);
-//        unset($_SESSION['loggedIn']);
-        session_unset();
+        //unset($_SESSION['user']);
+        //unset($_SESSION['loggedIn']);
+        //session_unset();
         session_destroy();
-        $_SESSION = array();
+        //$_SESSION = array();
+        session_start();
+        
     }
 
 }

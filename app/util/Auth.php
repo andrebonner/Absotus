@@ -19,17 +19,22 @@ class Auth {
         $cfg = $REG;
         Session::init();
         $logged = Session::get('loggedIn');
-        if (!$logged) {
+        if (!$logged || !isset($_COOKIE['absotus_user'])) {
             //die('Index');
             Session::destroy();
-            header('location: ' . $cfg->url . 'account/login', false);
+            header('location: ' . $cfg->url . 'account/login');
             exit;
         }
+//        else{
+//            die(Session::get('loggedIn'));
+//        }
     }
 
     public static function rememberLogin($value) {
         if (boolval($value)) {
-            setcookie('absotus_user', $data, time() + (86400 * 30), "/");
+            Session::init();
+            //die(Session::get('user'));            
+            setcookie('absotus_user', json_encode(Session::get('user')), time() + (86400 * 30), '/');
         }
     }
 

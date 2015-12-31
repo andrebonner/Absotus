@@ -32,6 +32,7 @@ class Account extends Controller {
     }
 
     function login() {
+        Session::init();
         $logged = Session::get('loggedIn');
         if ($logged) {
             //die('Login');
@@ -265,7 +266,10 @@ class Account extends Controller {
 
     function logout() {
         Session::destroy();
-        header('location: ../index.php');
+        if($_COOKIE['absotus_user']){
+            
+        }
+        header('location: ../account/login');
     }
 
 }
