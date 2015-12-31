@@ -53,7 +53,7 @@ class Project extends Controller {
     }
     
     function create(){
-        
+        if($_SERVER['REQUEST_METHOD']=='POST') $res=$this->model->create();
     }
     
     function delete(){

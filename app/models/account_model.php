@@ -20,7 +20,7 @@ class Account_Model extends Model {
         parent::__construct();
     }
 
-    public function changepassword() {
+    public function resetpassword() {
         global $REG;
         $this->_setting = $REG;
         try {
@@ -52,7 +52,7 @@ class Account_Model extends Model {
             $sth->bindValue(':oldpassword', $user['password']);
             $res = $sth->execute();
             if ($res) {
-                header('location: ../account/changepasswordconfirmation');
+                header('location: ../account/resetpasswordconfirmation');
                 die();
             } else {
                 return 'Password could not be changed';

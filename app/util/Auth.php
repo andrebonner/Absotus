@@ -17,11 +17,8 @@ class Auth {
     public static function handleLogin() {
         global $REG;
         $logged = Session::get('loggedIn');
-        if (!$logged) {
-//            print('<pre>');
-//            print_r($_GET);
-//            print('</pre>');
-//            die();
+        if (!$logged || !isset($_COOKIE['absotus_user'])) {
+            //die('Index');
             Session::destroy();
             if (isset($_GET['var'])) {
                 header('location: ' . $REG->url . 'account/login//' . $_GET['var']);
@@ -30,6 +27,9 @@ class Auth {
             }
             exit;
         }
+//        else{
+//            die(Session::get('loggedIn'));
+//        }
     }
 
     public static function last_Activity() {
