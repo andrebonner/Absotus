@@ -46,7 +46,7 @@ class Account_Model extends Model {
 //            print($user['password']);
 //            print "</pre>";
 //            die("UPDATE users SET password =:newpassword WHERE id=:id AND password=:oldpassword");
-            
+
             $sth = $this->db->prepare("UPDATE users SET password =:newpassword WHERE id=:id AND password=:oldpassword");
             $sth->bindValue(':id', $user['id']);
             $sth->bindValue(':newpassword', $password);
@@ -61,6 +61,14 @@ class Account_Model extends Model {
         } catch (Exception $e) {
             return $e->getMessage();
         }
+    }
+
+    function confirmemail() {
+        
+    }
+
+    function forgotpassword() {
+        
     }
 
     public function login() {
@@ -110,30 +118,6 @@ class Account_Model extends Model {
         }
     }
 
-    function verifycode() {
-        global $REG;
-        $this->_setting = $REG;
-        try {
-            //print_r($_SERVER); die();
-            $form = new Form();
-
-            $form->post('provider')
-                    ->val('minlength', 3)
-                    ->post('code')
-                    ->val('digit')
-                    ->post('remember')
-                    ->post('rememberBrowser');
-
-            $form->submit();
-            //echo 'Form passed';
-            $postf = $form->fetch();
-
-            
-        } catch (Exception $e) {
-            return $e->getMessage();
-        }
-    }
-
     function sendcode() {
         global $REG;
         $this->_setting = $REG;
@@ -161,12 +145,26 @@ class Account_Model extends Model {
         }
     }
 
-    function confirmemail() {
-        
-    }
+    function verifycode() {
+        global $REG;
+        $this->_setting = $REG;
+        try {
+            //print_r($_SERVER); die();
+            $form = new Form();
 
-    function forgotpassword() {
-        
+            $form->post('provider')
+                    ->val('minlength', 3)
+                    ->post('code')
+                    ->val('digit')
+                    ->post('remember')
+                    ->post('rememberBrowser');
+
+            $form->submit();
+            //echo 'Form passed';
+            $postf = $form->fetch();
+        } catch (Exception $e) {
+            return $e->getMessage();
+        }
     }
 
 }

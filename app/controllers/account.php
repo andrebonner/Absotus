@@ -27,44 +27,6 @@ class Account extends Controller {
 //        }
     }
 
-    function get($id = 0) {
-        echo 'Account';
-    }
-
-    function login() {
-        $logged = Session::get('loggedIn');
-        if ($logged) {
-            //die('Login');
-            header("location: ../index.php");
-            die();
-        }
-
-        if ($_SERVER['REQUEST_METHOD'] == 'POST')
-            $data = $this->model->login();
-
-        global $REG;
-        $cfg = $REG;
-        $this->view->title = 'Login';
-        $this->view->data = array(
-            'description' => 'This page is the index',
-            'cfg' => $this->cfg,
-            'error' => $data);
-        $this->view->css = array(
-            'app/webroot/bootstrap/css/bootstrap.min.css',
-            'app/webroot/toastr/css/toastr.css',
-            'app/views/account/css/login-template.css');
-        //$this->view->css = array('/index/css/carousel.css');
-        $this->view->js = array(
-            'app/webroot/bootstrap/js/jquery.min.js',
-            'app/webroot/bootstrap/js/bootstrap.min.js',
-            'app/webroot/toastr/js/toastr.js',
-            'app/views/account/js/login.js');
-        //echo "<!--" . strtoupper("Welcome to " . $this->view->data['cfg']->title) . "-->\n";
-        $this->view->render("account/_header");
-        $this->view->render("account/login");
-        $this->view->render("account/_footer");
-    }
-
     function changepasswordconfirmation() {
         Auth::handleLogin();
 
@@ -121,62 +83,6 @@ class Account extends Controller {
         //echo "<!--" . strtoupper("Welcome to " . $this->view->data['cfg']->title) . "-->\n";
         $this->view->render("account/_header");
         $this->view->render("account/changepassword");
-        $this->view->render("account/_footer");
-    }
-
-    function verifycode() {
-        Auth::handleLogin();
-        if ($_SERVER['REQUEST_METHOD'] == 'POST')
-            $data = $this->model->verifycode();
-
-        global $REG;
-        $cfg = $REG;
-        $this->view->title = 'Verify Code';
-        $this->view->data = array(
-            'description' => 'This page is the verify code',
-            'cfg' => $this->cfg,
-            'error' => $data);
-        $this->view->css = array(
-            'app/webroot/bootstrap/css/bootstrap.min.css',
-            'app/webroot/toastr/css/toastr.css',
-            'app/views/account/css/login-template.css');
-        //$this->view->css = array('/index/css/carousel.css');
-        $this->view->js = array(
-            'app/webroot/bootstrap/js/jquery.min.js',
-            'app/webroot/bootstrap/js/bootstrap.min.js',
-            'app/webroot/toastr/js/toastr.js',
-            'app/views/account/js/login.js');
-        //echo "<!--" . strtoupper("Welcome to " . $this->view->data['cfg']->title) . "-->\n";
-        $this->view->render("account/_header");
-        $this->view->render("account/verifycode");
-        $this->view->render("account/_footer");
-    }
-
-    function sendcode() {
-        Auth::handleLogin();
-        if ($_SERVER['REQUEST_METHOD'] == 'POST')
-            $data = $this->model->sendcode();
-
-        global $REG;
-        $cfg = $REG;
-        $this->view->title = 'Send Code';
-        $this->view->data = array(
-            'description' => 'This page is the send code',
-            'cfg' => $this->cfg,
-            'error' => $data);
-        $this->view->css = array(
-            'app/webroot/bootstrap/css/bootstrap.min.css',
-            'app/webroot/toastr/css/toastr.css',
-            'app/views/account/css/login-template.css');
-        //$this->view->css = array('/index/css/carousel.css');
-        $this->view->js = array(
-            'app/webroot/bootstrap/js/jquery.min.js',
-            'app/webroot/bootstrap/js/bootstrap.min.js',
-            'app/webroot/toastr/js/toastr.js',
-            'app/views/account/js/login.js');
-        //echo "<!--" . strtoupper("Welcome to " . $this->view->data['cfg']->title) . "-->\n";
-        $this->view->render("account/_header");
-        $this->view->render("account/sendcode");
         $this->view->render("account/_footer");
     }
 
@@ -263,9 +169,107 @@ class Account extends Controller {
         $this->view->render("account/_footer");
     }
 
+    function get($id = 0) {
+        echo 'Account';
+    }
+
+    function login() {
+        Session::init();
+        $logged = Session::get('loggedIn');
+        if ($logged) {
+            //die('Login');
+            header("location: ../index.php");
+            die();
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST')
+            $data = $this->model->login();
+
+        global $REG;
+        $cfg = $REG;
+        $this->view->title = 'Login';
+        $this->view->data = array(
+            'description' => 'This page is the index',
+            'cfg' => $this->cfg,
+            'error' => $data);
+        $this->view->css = array(
+            'app/webroot/bootstrap/css/bootstrap.min.css',
+            'app/webroot/toastr/css/toastr.css',
+            'app/views/account/css/login-template.css');
+        //$this->view->css = array('/index/css/carousel.css');
+        $this->view->js = array(
+            'app/webroot/bootstrap/js/jquery.min.js',
+            'app/webroot/bootstrap/js/bootstrap.min.js',
+            'app/webroot/toastr/js/toastr.js',
+            'app/views/account/js/login.js');
+        //echo "<!--" . strtoupper("Welcome to " . $this->view->data['cfg']->title) . "-->\n";
+        $this->view->render("account/_header");
+        $this->view->render("account/login");
+        $this->view->render("account/_footer");
+    }
+
     function logout() {
         Session::destroy();
-        header('location: ../index.php');
+        if (isset($_COOKIE['absotus_user'])) {
+            setcookie('absotus_user', '', time() + (86400 * 30), '/Absotus');
+        }
+        header('location: ../account/login');
+    }
+
+    function sendcode() {
+        Auth::handleLogin();
+        if ($_SERVER['REQUEST_METHOD'] == 'POST')
+            $data = $this->model->sendcode();
+
+        global $REG;
+        $cfg = $REG;
+        $this->view->title = 'Send Code';
+        $this->view->data = array(
+            'description' => 'This page is the send code',
+            'cfg' => $this->cfg,
+            'error' => $data);
+        $this->view->css = array(
+            'app/webroot/bootstrap/css/bootstrap.min.css',
+            'app/webroot/toastr/css/toastr.css',
+            'app/views/account/css/login-template.css');
+        //$this->view->css = array('/index/css/carousel.css');
+        $this->view->js = array(
+            'app/webroot/bootstrap/js/jquery.min.js',
+            'app/webroot/bootstrap/js/bootstrap.min.js',
+            'app/webroot/toastr/js/toastr.js',
+            'app/views/account/js/login.js');
+        //echo "<!--" . strtoupper("Welcome to " . $this->view->data['cfg']->title) . "-->\n";
+        $this->view->render("account/_header");
+        $this->view->render("account/sendcode");
+        $this->view->render("account/_footer");
+    }
+
+    function verifycode() {
+        Auth::handleLogin();
+        if ($_SERVER['REQUEST_METHOD'] == 'POST')
+            $data = $this->model->verifycode();
+
+        global $REG;
+        $cfg = $REG;
+        $this->view->title = 'Verify Code';
+        $this->view->data = array(
+            'description' => 'This page is the verify code',
+            'cfg' => $this->cfg,
+            'error' => $data);
+        $this->view->css = array(
+            'app/webroot/bootstrap/css/bootstrap.min.css',
+            'app/webroot/toastr/css/toastr.css',
+            'app/views/account/css/login-template.css');
+        //$this->view->css = array('/index/css/carousel.css');
+        $this->view->js = array(
+            'app/webroot/bootstrap/js/jquery.min.js',
+            'app/webroot/bootstrap/js/bootstrap.min.js',
+            'app/webroot/toastr/js/toastr.js',
+            'app/views/account/js/login.js');
+        //echo "<!--" . strtoupper("Welcome to " . $this->view->data['cfg']->title) . "-->\n";
+        $this->view->render("account/_header");
+        $this->view->render("account/verifycode");
+        $this->view->render("account/_footer");
     }
 
 }

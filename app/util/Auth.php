@@ -15,21 +15,46 @@ class Auth {
 
     // handle authentication
     public static function handleLogin() {
-        global $REG;
-        $cfg = $REG;
         Session::init();
         $logged = Session::get('loggedIn');
         if (!$logged) {
             //die('Index');
             Session::destroy();
-            header('location: ' . $cfg->url . 'account/login', false);
+            header('location: ../account/login');
             exit;
+        }  
+    }
+
+    public static function last_Activity() {
+        $current_time = $_SERVER['REQUEST_TIME'];
+        /**
+         * for a 30 minute timeout, specified in seconds
+         */
+        $timeout_duration = 1800;
+
+        /**
+         * Here we look for the user’s LAST_ACTIVITY timestamp. If
+         * it’s set and indicates our $timeout_duration has passed, 
+         * blow away any previous $_SESSION data and start a new one.
+         */
+        Session::init();
+        $last_activity =Session::get('last_activity');
+        if (isset($last_activity) && ($current_time - $last_activity) > $timeout_duration) {
+            Session::destroy();
         }
+
+        /**
+         * Finally, update LAST_ACTIVITY so that our timeout 
+         * is based on it and not the user’s login time.
+         */
+        Session::set('last_activity', $current_time);
     }
 
     public static function rememberLogin($value) {
         if (boolval($value)) {
-            setcookie('absotus_user', $data, time() + (86400 * 30), "/");
+            Session::init();
+            //die(Session::get('user'));            
+            setcookie('absotus_user', json_encode(Session::get('user')), time() + (86400 * 30), '/Absotus');
         }
     }
 
