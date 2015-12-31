@@ -15,14 +15,21 @@ class Auth {
 
     // handle authentication
     public static function handleLogin() {
-        Session::init();
+        global $REG;
         $logged = Session::get('loggedIn');
         if (!$logged) {
-            //die('Index');
+//            print('<pre>');
+//            print_r($_GET);
+//            print('</pre>');
+//            die();
             Session::destroy();
-            header('location: ../account/login');
+            if (isset($_GET['var'])) {
+                header('location: ' . $REG->url . 'account/login//' . $_GET['var']);
+            }else{
+                header('location: ' . $REG->url . 'account/login');
+            }
             exit;
-        }  
+        }
     }
 
     public static function last_Activity() {
@@ -37,8 +44,8 @@ class Auth {
          * it’s set and indicates our $timeout_duration has passed, 
          * blow away any previous $_SESSION data and start a new one.
          */
-        Session::init();
-        $last_activity =Session::get('last_activity');
+        
+        $last_activity = Session::get('last_activity');
         if (isset($last_activity) && ($current_time - $last_activity) > $timeout_duration) {
             Session::destroy();
         }
@@ -52,7 +59,6 @@ class Auth {
 
     public static function rememberLogin($value) {
         if (boolval($value)) {
-            Session::init();
             //die(Session::get('user'));            
             setcookie('absotus_user', json_encode(Session::get('user')), time() + (86400 * 30), '/Absotus');
         }

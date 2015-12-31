@@ -46,18 +46,19 @@ class Session {
     }
 
     public static function get($key) {
+        session_start();
         if (isset($_SESSION[$key]))
             return $_SESSION[$key];
     }
 
     public static function destroy() {
-        
+        session_start();
         //unset($_SESSION['user']);
         //unset($_SESSION['loggedIn']);
         //session_unset();
         session_destroy();
         //$_SESSION = array();
-        session_start();
+        
         
     }
 

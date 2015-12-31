@@ -173,20 +173,23 @@ class Account extends Controller {
         echo 'Account';
     }
 
-    function login() {
+    function login($return_url='') {
+            
+        global $REG;
+        $cfg = $REG;
+        
         Session::init();
         $logged = Session::get('loggedIn');
         if ($logged) {
             //die('Login');
-            header("location: ../index.php");
+            header("location: ".$this->cfg->url."index.php");
             die();
         }
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST')
-            $data = $this->model->login();
+            $data = $this->model->login($return_url);
 
-        global $REG;
-        $cfg = $REG;
+        
         $this->view->title = 'Login';
         $this->view->data = array(
             'description' => 'This page is the index',
@@ -213,7 +216,7 @@ class Account extends Controller {
         if (isset($_COOKIE['absotus_user'])) {
             setcookie('absotus_user', '', time() + (86400 * 30), '/Absotus');
         }
-        header('location: ../account/login');
+        Auth::handleLogin();
     }
 
     function sendcode() {

@@ -37,7 +37,6 @@ class Account_Model extends Model {
             $form->submit();
             //echo 'Form passed';
             $postf = $form->fetch();
-            Session::init();
             $user = Session::get('user');
 //            print "<pre>";
 //            //print_r($postf);
@@ -71,7 +70,7 @@ class Account_Model extends Model {
         
     }
 
-    public function login() {
+    public function login($return_url = '') {
         global $REG;
         $this->_setting = $REG;
         try {
@@ -88,10 +87,12 @@ class Account_Model extends Model {
             //echo 'Form passed';
             $postf = $form->fetch();
 
-            print "<pre>";
-            print_r($postf);
-            print $password = Hash::create('md5', $postf['password'], $this->_setting->hash_pass_key);
-            print "</pre>";
+            $password = Hash::create('md5', $postf['password'], $this->_setting->hash_pass_key);
+
+//            print "<pre>";
+//            print_r($postf);
+//            print $password;
+//            print "</pre>";
 
             $sth = $this->db->prepare("SELECT a.id, a.username, a.email, a.password, c.role FROM users a INNER JOIN user_roles b ON b.user_id = a.id INNER JOIN roles c ON b.user_role = c.id WHERE a.username =:username AND a.password =:password");
             $sth->bindValue(':username', $postf['email']);
@@ -104,11 +105,15 @@ class Account_Model extends Model {
             $count = $sth->rowCount();
             if ($count > 0) {
                 // login
-                Session::init();
                 Session::set('user', $data);
                 Session::set('loggedIn', true);
                 Auth::rememberLogin($postf['remember']);
-                header('location: ../login');
+                
+                if ($return_url == '') {
+                    header('location: ../index.php');
+                } else {
+                    header('location: '. $this->_setting->url . $return_url);
+                }
                 die();
             } else {
                 return 'Login could not be processed';

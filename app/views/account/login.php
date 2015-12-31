@@ -7,7 +7,7 @@
                             <h3 class="panel-title">Please sign in</h3>
                         </div>
                         <div class="panel-body">
-                            <form id="loginform" method="POST" action="<?php echo $this->data['cfg']->url; ?>account/login/" accept-charset="UTF-8" role="form">
+                            <form id="loginform" method="POST" action="" accept-charset="UTF-8" role="form">
                                 <fieldset> 
                                     <?php if ($this->data['error']) { ?>
                                         <div class="alert alert-warning">
