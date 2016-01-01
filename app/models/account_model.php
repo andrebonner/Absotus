@@ -84,7 +84,7 @@ class Account_Model extends Model {
                     ->post('remember');
 
             $form->submit();
-            //echo 'Form passed';
+            print 'Form passed';
             $postf = $form->fetch();
 
             $password = Hash::create('md5', $postf['password'], $this->_setting->hash_pass_key);
@@ -114,13 +114,14 @@ class Account_Model extends Model {
                 } else {
                     header('location: '. $this->_setting->url . $return_url);
                 }
-                die();
+                exit();
             } else {
                 return 'Login could not be processed';
             }
         } catch (Exception $e) {
             return $e->getMessage();
         }
+        
     }
 
     function sendcode() {

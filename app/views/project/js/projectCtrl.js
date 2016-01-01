@@ -2,7 +2,7 @@ var projects = app.controller('projectController', function ($scope, $http, $rou
     $scope.title = "Projects";
 
     $http.get("project/get").success(function (data) {
-        $scope.data = data.dashboard;
+        $scope.projects = data;
     });
     $scope.edit_id = $routeParams.edit_id - 1;
     $scope.details_id = $routeParams.details_id - 1;

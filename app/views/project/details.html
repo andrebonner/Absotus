@@ -1,13 +1,15 @@
 <div>
-    <h4>Project Details #{{data.projects[details_id].id}}</h4>
+    <h1>Project Details #{{projects[details_id].id}}</h1>
     <dl class="dl-horizontal">
         <dt>Project Name:</dt>
-        <dd>{{data.projects[details_id].name}}</dd>
+        <dd>{{projects[details_id].name}}</dd>
         <dt>Description:</dt>
-        <dd>{{data.projects[details_id].description}}</dd>
-        <dt>Issues ({{data.projects[details_id].issues.length}}):<dt>
+        <dd>{{projects[details_id].description}}</dd>
+        <dt>Modified:</dt>
+        <dd>{{projects[details_id].modifiedon}}</dd>
+        <dt>Issues ({{projects[details_id].issues.length}}):<dt>
         <dd>
-            <div ng-repeat="issue in data.projects[details_id].issues">
+            <div ng-repeat="issue in projects[details_id].issues">
                 <b>issue #{{issue.id}}</b> {{issue.description}}
             </div>
         </dd>

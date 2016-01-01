@@ -1,16 +1,16 @@
-<form method="POST" action="project/edit" >
+<form id="editform" method="POST" action="project/edit" >
     <div class="form-horizontal">
-        <h4>Edit Project <input type="hidden" name="id" value="{{data.projects[delete_id].id}}"/></h4>
+        <h1>Edit Project <input type="hidden" name="id" value="{{projects[edit_id].id}}"/></h1>
         <div class="form-group">
             <label for="name" class="control-label col-md-2">Project Name</label>
             <div class="col-md-10">
-                <input type="text" class="form-control" name="name" value="{{data.projects[edit_id].name}}" required/>
+                <input type="text" class="form-control" name="name" value="{{projects[edit_id].name}}" required/>
             </div>
         </div>
         <div class="form-group">
             <label for="description" class="control-label col-md-2">Description</label>
             <div class="col-md-10">
-                <textarea name="description" class="form-control" required>{{data.projects[edit_id].description}}</textarea>
+                <textarea name="description" class="form-control" required>{{projects[edit_id].description}}</textarea>
             </div>
         </div>
         <div class="form-group">
@@ -20,3 +20,12 @@
         </div>
     </div>
 </form>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#editform').submit(function (e) {
+            toastr.options.positionClass = "toast-bottom-left";
+            toastr.success("Updating Project...");
+            e.preventDefault();
+        });
+    });
+</script>

@@ -20,7 +20,7 @@ class Auth {
         if (!$logged || !isset($_COOKIE['absotus_user'])) {
             //die('Index');
             Session::destroy();
-            if (isset($_GET['var'])) {
+            if (isset($_GET['var']) || $_GET['var']!='account/logout') {
                 header('location: ' . $REG->url . 'account/login//' . $_GET['var']);
             }else{
                 header('location: ' . $REG->url . 'account/login');

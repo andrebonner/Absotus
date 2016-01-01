@@ -32,6 +32,7 @@ class Project extends Controller {
             'user' => Session::get('user'));
         $this->view->css = array(
             'app/webroot/bootstrap/css/bootstrap.min.css',
+            'app/webroot/toastr/css/toastr.css',
             'app/views/index/css/dashboard.css');
         
         $this->view->js = array(
@@ -40,7 +41,8 @@ class Project extends Controller {
             'app/webroot/angular/angular-route.min.js',
             'app/views/index/js/dashboardApp.js',
             'app/views/project/js/projectCtrl.js',
-            'app/webroot/bootstrap/js/bootstrap.min.js');
+            'app/webroot/bootstrap/js/bootstrap.min.js',
+            'app/webroot/toastr/js/toastr.js');
         echo "<!--" . strtoupper("Welcome to " . $this->view->data['cfg']->title) . "-->\n";
         $this->view->render("header");
         $this->view->render("project/index");
@@ -57,11 +59,11 @@ class Project extends Controller {
     }
     
     function delete(){
-        
+        if($_SERVER['REQUEST_METHOD']=='POST') $res=$this->model->delete($id);
     }
     
-    function edit(){
-        if($_SERVER['REQUEST_METHOD']=='POST') $res=$this->model->edit();
+    function edit($id){
+        if($_SERVER['REQUEST_METHOD']=='POST') $res=$this->model->edit($id);
     }
 
 }

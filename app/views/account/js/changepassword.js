@@ -6,7 +6,7 @@
 
 
 $(document).ready(function () {
-   
+
     $('#changepasswordform').submit(function (e) {
 
         var oldpassword = $('#oldpassword').val();
@@ -23,8 +23,16 @@ $(document).ready(function () {
             toastr.warning("new password must match retyped password");
             e.preventDefault();
         } else {
-            toastr.options.positionClass = "toast-top-full-width";
-            toastr.success("Changing password");
+            var exp =new RegExp("/[^A-Za-z0-9]/");
+            console.log(exp.test(newpassword));
+            console.log(newpassword);
+            if (!newpassword.match('/[^A-Za-z0-9]/')) {
+                toastr.warning("Password must contain letters and numbers");
+                e.preventDefault();
+            } else {
+                toastr.options.positionClass = "toast-top-full-width";
+                toastr.success("Changing password");
+            }
         }
     });
 });
