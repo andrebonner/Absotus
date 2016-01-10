@@ -27,7 +27,7 @@ class Account extends Controller {
 //        }
     }
 
-    function changepasswordconfirmation() {
+    function resetpasswordconfirmation() {
         Auth::handleLogin();
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST')
@@ -60,7 +60,7 @@ class Account extends Controller {
     function changepassword() {
         Auth::handleLogin();
         if ($_SERVER['REQUEST_METHOD'] == 'POST')
-            $data = $this->model->changepassword();
+            $data = $this->model->resetpassword();
 
         global $REG;
         $cfg = $REG;
@@ -212,11 +212,13 @@ class Account extends Controller {
     }
 
     function logout() {
+        global $REG;
         Session::destroy();
         if (isset($_COOKIE['absotus_user'])) {
-            setcookie('absotus_user', '', time() + (86400 * 30), '/Absotus');
+            setcookie('absotus_user', '', time() - 3600, '/Absotus');
         }
-        Auth::handleLogin();
+        //Auth::handleLogin();
+        header('location: ' . $REG->url . 'account/login');
     }
 
     function sendcode() {

@@ -108,12 +108,12 @@ class Account_Model extends Model {
                 Session::set('user', $data);
                 Session::set('loggedIn', true);
                 Auth::rememberLogin($postf['remember']);
-                
-                if ($return_url == '') {
-                    header('location: ../index.php');
-                } else {
-                    header('location: '. $this->_setting->url . $return_url);
-                }
+                ($return_url == '') ? header('location: ../index.php') : header('location: '. $this->_setting->url . $return_url);
+//                if ($return_url == '') {
+//                    header('location: ../index.php');
+//                } else {
+//                    header('location: '. $this->_setting->url . $return_url);
+//                }
                 exit();
             } else {
                 return 'Login could not be processed';

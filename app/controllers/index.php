@@ -19,6 +19,7 @@ class Index extends Controller {
         parent::__construct();
         //print "Index Page";
         Auth::handleLogin();
+        Auth::last_Activity();
     }
 
     function index() {

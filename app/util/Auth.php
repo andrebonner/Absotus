@@ -16,10 +16,14 @@ class Auth {
     // handle authentication
     public static function handleLogin() {
         global $REG;
+        
+        if (isset($_COOKIE['absotus_user'])){
+            // 
+        }
         $logged = Session::get('loggedIn');
-        if (!$logged || !isset($_COOKIE['absotus_user'])) {
+        if (!$logged)  {
             //die('Index');
-            Session::destroy();
+            Session::destroy();            
             if (isset($_GET['var']) || $_GET['var']!='account/logout') {
                 header('location: ' . $REG->url . 'account/login//' . $_GET['var']);
             }else{

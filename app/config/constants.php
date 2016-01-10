@@ -9,4 +9,6 @@
 $REG->hash_gen_key = 'ham2344';
 $REG->hash_pass_key = 'ham2344';
 
+$REG->secret_key = 'SECRET';
+
 $REG->title = 'Absotus';

@@ -17,16 +17,15 @@ $(document).ready(function () {
             $('.newpass').addClass('has-warning');
             toastr.warning("new password has to be 6 characters or more");
             e.preventDefault();
-        } else if (newpassword != retypepassword) {
+        } else if (newpassword !== retypepassword) {
             $('.retypepass').removeClass('has-warning');
             $('.retypepass').addClass('has-warning');
             toastr.warning("new password must match retyped password");
             e.preventDefault();
         } else {
-            var exp =new RegExp("/[^A-Za-z0-9]/");
-            console.log(exp.test(newpassword));
+            console.log(/\d/g.test(newpassword));
             console.log(newpassword);
-            if (!newpassword.match('/[^A-Za-z0-9]/')) {
+            if (!/\d/g.test(newpassword)) {
                 toastr.warning("Password must contain letters and numbers");
                 e.preventDefault();
             } else {
