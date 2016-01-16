@@ -56,9 +56,13 @@ require_once('app/util/Auth.php');
 
 # autoload class as needed
 
-function __autoload($class) {
+//function __autoload($class) {
+//    require("core/$class.php");
+//}
+
+spl_autoload_register(function($class) {
     require("core/$class.php");
-}
+});
 
 # define new bootstrap object
 $app = new Boot;
