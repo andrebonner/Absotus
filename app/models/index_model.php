@@ -25,7 +25,7 @@ class Index_Model extends Model {
         global $REG;
         $this->_setting = $REG;
 
-        $sth = $this->db->prepare("SELECT * FROM projects LIMIT 10");
+        $sth = $this->db->prepare("SELECT p.id, p.name, p.description, p.modifiedon, (SELECT COUNT(*) FROM issues AS i WHERE i.project_id = p.id) AS issues FROM projects AS p LIMIT 10");
         $sth->execute();
         $data = $sth->fetchAll(PDO::FETCH_ASSOC);
         
@@ -33,7 +33,7 @@ class Index_Model extends Model {
         //print_r($data);
         //print'</pre>';
         
-        $dashboard = array(
+        /*$dashboard = array(
             'dashboard' => array(
                 'projects' => array(
                     array(
@@ -85,8 +85,8 @@ class Index_Model extends Model {
                     'spanish',
                     'english')
             )
-        );
-        return json_encode($dashboard);
+        );*/
+        return json_encode($data);
         
     }
 }

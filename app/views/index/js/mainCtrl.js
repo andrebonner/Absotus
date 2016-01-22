@@ -3,12 +3,12 @@ app.controller('mainController', function ($scope, $http, $routeParams) {
     $scope.title = "Featured Projects";
     
     $http.get("index/get").success(function(data) {
-        $scope.data = data.dashboard;
+        $scope.data = data;
 
         $scope.projectIssues = function () {
             $scope.num=0;
-            for (p in $scope.data.projects) {
-                $scope.num += $scope.data.projects[p].issues.length;
+            for (p in $scope.data) {
+                $scope.num += $scope.data[p].issues;
             }
             return $scope.num;
         };
