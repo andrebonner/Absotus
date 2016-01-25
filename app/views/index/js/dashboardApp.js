@@ -27,7 +27,7 @@ var app = angular.module('dashboard', ['ngRoute'])
                 },
                 {
                     "title": "Issues",
-                    "url": "issues"
+                    "url": "issue"
                 },
                 {
                     "title": "Users",

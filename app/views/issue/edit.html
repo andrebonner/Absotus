@@ -1,0 +1,61 @@
+<form id="editform" method="POST" action="issue/edit" >
+<div class="form-horizontal">
+    <h2>Edit Issue </h2>
+    <div class="form-group">
+         <label for="projects" class="control-label col-md-2">Projects</label>
+        <div class="col-md-10">
+            <select name="projects" class="form-control" required="">
+                <option ng-repeat="project in projects" value='{{project.id}}'>{{project.name}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="name" class="control-label col-md-2">Issue Title</label>
+        <div class="col-md-10">
+            <input name="title" class="form-control" value="{{issues[edit_id].issue_title}}" required=""/>
+        </div>
+    </div>
+    <div class="form-group">
+         <label for="description" class="control-label col-md-2">Description</label>
+        <div class="col-md-10">
+            <textarea name="description" class="form-control" required="">{{issues[edit_id].issue_description}}</textarea>
+        </div>
+    </div>
+    <div class="form-group">
+         <label for="type" class="control-label col-md-2">Issue Type</label>
+        <div class="col-md-10">
+            <select name="type" class="form-control" required="">
+               <option ng-repeat="type in types" value='{{type.issue_status_id}}'>{{type.issue_status_type}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+         <label for="priority" class="control-label col-md-2">Issue Priority</label>
+        <div class="col-md-10">
+            <select name="priority" class="form-control" required="">
+                 <option ng-repeat="priority in priorities" value='{{priority.issue_priority_id}}'>{{priority.issue_priority_type}}</option>
+            </select>
+        </div>
+    </div>
+     <div class="form-group">
+         <label for="resolution" class="control-label col-md-2">Resolution Summary</label>
+        <div class="col-md-10">
+            <textarea name="resolution" class="form-control" required="">{{issues[edit_id].issue_resolutionsummary}}</textarea>
+        </div>
+    </div>
+    <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+</div>
+</form>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#editform').submit(function (e) {
+            toastr.options.positionClass = "toast-bottom-left";
+            toastr.success("Updating Issue...");
+            e.preventDefault();
+        });
+    });
+</script>
