@@ -6,11 +6,11 @@ var app = angular.module('dashboard', ['ngRoute'])
                          template: '<br/>'
                          
                          }).*/
-                        when('/project/edit/:edit_id', {
+                        when('/project#/edit/:edit_id', {
                             templateUrl: 'app/views/index/edit.html',
-                            controller: 'mainController'
+                            controller: 'projectController'
                         }).
-                        when('/project/details/:details_id', {
+                        when('/project#/details/:details_id', {
                             templateUrl: 'app/views/index/details.html',
                             controller: 'mainController'
                         }).
@@ -23,15 +23,26 @@ var app = angular.module('dashboard', ['ngRoute'])
             $scope.menu = [
                 {
                     "title": "Projects",
-                    "url": "project"
+                    "url": "project",
+                    "submenu": null
                 },
                 {
                     "title": "Issues",
-                    "url": "issue"
+                    "url": "issue",
+                    "submenu": [
+                        {
+                            "title": "Issue Types", 
+                            "url": "#/issueType"}, 
+                        {
+                            "title": "Issue Priorities", 
+                            "url": "#/issuePriorities"
+                        }
+                    ]
                 },
                 {
                     "title": "Users",
-                    "url": "user"
+                    "url": "user",
+                    "submenu":null
                 }
             ];
 

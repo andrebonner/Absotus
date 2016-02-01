@@ -285,18 +285,25 @@ class Issue_Model extends Model {
             //print_r($_SERVER); die();
             $form = new Form();
 
-            $form->post('name')
+            $form->post('projects')
+                    ->post('name')
                     ->val('minlength', 6)
                     ->post('description')
-                    ->val('minlength', 6);
+                    ->val('minlength', 6)
+                    ->post('type')
+                    ->post('priority');
 
             $form->submit();
             //echo 'Form passed';
             $postf = $form->fetch();
             
-            $sth = $this->db->prepare("INSERT INTO issues(name, description, modifiedon) VALUES (:name, :description, NOW())");
-            $sth->bindValue(':name', $postf['name']);
+            $sth = $this->db->prepare("INSERT INTO issues(issue_title, issue_description, issue_type, issue_priority, issue_createdby, issue_createdon, project_id) VALUES (:title, :description, :type, :priority, :user, NOW(), :project_id)");
+            $sth->bindValue(':title', $postf['title']);
             $sth->bindValue(':description', $postf['description']);
+            $sth->bindValue(':type', $postf['type']);
+            $sth->bindValue(':priority', $postf['priority']);
+            $sth->bindValue(':createdby', $userid);
+            $sth->bindValue(':project_id', $postf['projects']);
             echo $res = $sth->execute();
             
         } catch (Exception $e) {
@@ -336,22 +343,27 @@ class Issue_Model extends Model {
             //print_r($_SERVER); die();
             $form = new Form();
 
-            $form->post('id')
+            $form->post('projects')
                     ->post('name')
                     ->val('minlength', 6)
                     ->post('description')
-                    ->val('minlength', 6);
-
+                    ->val('minlength', 6)
+                    ->post('type')
+                    ->post('priority');
+            
             $form->submit();
             //echo 'Form passed';
             $postf = $form->fetch();
             
             $id=$postf['id']>0 ? $postf['id']: $id;
             
-            echo "UPDATE issues SET name='".$postf['name']."', description='".$postf['description']."', modifiedon=NOW() WHERE id=".$id;
-            $sth = $this->db->prepare("UPDATE issues SET name=:name, description=:description, modifiedon=NOW() WHERE id=:id");
-            $sth->bindValue(':name', $postf['name']);
+            echo "UPDATE issues SET issue_title='".$postf['title']."', issue_description='".$postf['description']."', issue_type=".$postf['type'].", issue_priority=".$postf['priority'].", issue_resolutionsummary=".$postf['resolution'].", project_id=".$postf['projects']." WHERE id=".$id;
+            $sth = $this->db->prepare("UPDATE issues SET name=:name, description=:description, issue_type=:type, issue_priority=:priority, issue_resolutionsummary=:resolution, project_id=:project_id WHERE id=:id");
+            $sth->bindValue(':title', $postf['title']);
             $sth->bindValue(':description', $postf['description']);
+            $sth->bindValue(':type', $postf['type']);
+            $sth->bindValue(':priority', $postf['priority']);
+            $sth->bindValue(':resolution', $postf['resolution']);
             $sth->bindValue(':id', $id);
             $res = $sth->execute();
             

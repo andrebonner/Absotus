@@ -67,9 +67,13 @@ and open the template in the editor.
                         <li><a href="#/user">Users</a></li>
                     </ul>-->
                     <ul class="nav nav-sidebar" >
-                        <li ng-repeat="m in navside | filter: search"><a href="{{m.url}}"><span ng-bind="m.title"></span></a></li>
+                        <li ng-repeat="m in navside| filter: search"><a href="{{m.url}}"><span ng-bind="m.title"></span></a></li>
                     </ul>
                     <ul class="nav nav-sidebar" >
-                        <li ng-repeat="m in menu | filter: search"><a href="{{m.url}}"><span ng-bind="m.title"></span></a></li>
+                        <li ng-repeat="m in menu| filter: search"><a href="{{m.url}}"><span ng-bind="m.title"></span></a>
+                            <ul class="nav navbar-collapse">
+                                <li ng-repeat="s in m.submenu"><a href="{{m.url + s.url}}"><span ng-bind="s.title"></span></a></li>
+                            </ul>
+                        </li>
                     </ul>
                 </div>
