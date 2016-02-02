@@ -18,7 +18,7 @@
             <tbody>
                 <tr ng-repeat="project in projects">
                     <td><span ng-bind="project.id"></span></td>
-                    <td><a href="<?php echo $this->data['cfg']->url; ?>#/details/{{project.id}}"><span ng-bind="project.name"></span></a></td>
+                    <td><a href="#/details/{{project.id}}"><span ng-bind="project.name"></span></a></td>
                     <td><span ng-bind="project.description"></span></td>
 
                     <td><span ng-bind="project.modifiedon | date:'EEEE, MMMM d, y'"></span></td>

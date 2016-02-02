@@ -26,7 +26,10 @@ class Project_Model extends Model {
         global $REG;
         $this->_setting = $REG;
 
-        $sth = $this->db->prepare("SELECT * FROM projects LIMIT 10");
+        $user = Session::get('user');
+        $userid = $user['id'];
+        
+        $sth = $this->db->prepare("SELECT p.id AS id, p.name AS name, p.description AS description, DATE_FORMAT(p.modifiedon, '%Y-%m-%d') AS modifiedon FROM projects AS p JOIN projectaccess AS pa ON pa.project_id=p.id WHERE pa.user_id = ". $userid ." LIMIT 10");
         $sth->execute();
         $data = $sth->fetchAll(PDO::FETCH_ASSOC);
         
@@ -156,7 +159,7 @@ class Project_Model extends Model {
             
             $id=$postf['id']>0 ? $postf['id']: $id;
             
-            echo "UPDATE projects SET name='".$postf['name']."', description='".$postf['description']."', modifiedon=NOW() WHERE id=".$id;
+            //echo "UPDATE projects SET name='".$postf['name']."', description='".$postf['description']."', modifiedon=NOW() WHERE id=".$id;
             $sth = $this->db->prepare("UPDATE projects SET name=:name, description=:description, modifiedon=NOW() WHERE id=:id");
             $sth->bindValue(':name', $postf['name']);
             $sth->bindValue(':description', $postf['description']);

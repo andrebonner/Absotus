@@ -6,7 +6,7 @@
         <dt>Description:</dt>
         <dd>{{projects[details_id].description}}</dd>
         <dt>Modified:</dt>
-        <dd>{{projects[details_id].modifiedon}}</dd>
+        <dd>{{projects[details_id].modifiedon | date:'EEEE, MMMM d, y'}}</dd>
         <dt>Issues ({{projects[details_id].issues.length}}):<dt>
         <dd>
             <div ng-repeat="issue in projects[details_id].issues">
