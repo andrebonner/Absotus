@@ -22,7 +22,7 @@
                     <td><span ng-bind="issue.issue_description"></span></td>
                     <td><span ng-bind="issue.project_name"></span></td>
                     <td><span ng-bind="issue.issue_createdon | date:'EEEE, MMMM d, y'"></span></td>
-                    <td><a href="#/edit/{{issue.issue_id}}"><span ng-bind="'Edit'"></span></a>&nbsp;<span ng-bind="'|'"></span>&nbsp;<a href="#/details/{{issue.issue_id}}"><span ng-bind="'Details'"></span></a>&nbsp;<span ng-bind="'|'"></span>&nbsp;<a href="#/delete/{{issue.issue_id}}"><span ng-bind="'Delete'"></span></a></td>
+                    <td><a href="#/edit/{{issue.issue_id}}"><span ng-bind="'Edit'"></span></a>&nbsp;<span ng-bind="'|'"></span>&nbsp;<a href="#/details/{{issue.issue_id}}"><span ng-bind="'Details'"></span></a>&nbsp;<span ng-bind="'|'" ng-hide=""></span>&nbsp;<a href="#/delete/{{issue.issue_id}}" ng-hide=""><span ng-bind="'Delete'"></span></a></td>
                 </tr>
 
             </tbody>

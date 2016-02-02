@@ -1,0 +1,51 @@
+<form id="editform" method="POST" action="user/edit" >
+    <div class="form-horizontal">
+        <h1>Edit User <input type="hidden" name="id" value="{{users[edit_id].id}}"/></h1>
+        <div class="form-group">
+            <label for="uname" class="control-label col-md-2">User Name</label>
+            <div class="col-md-10">
+                <input type="text" class="form-control" name="uname" value="{{users[edit_id].username}}" required/>
+            </div>
+        </div>
+        <div class="form-group">
+        <label for="pword" class="control-label col-md-2">Password</label>
+        <div class="col-md-10">
+            <input name="pword" type="password" class="form-control" value="" required=""/>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="fullname" class="control-label col-md-2">Full Name</label>
+        <div class="col-md-10">
+            <input name="fullname" class="form-control" value="{{users[edit_id].name}}" required=""/>
+        </div>
+    </div>
+   <div class="form-group">
+        <label for="emailaddress" class="control-label col-md-2">Email Address</label>
+        <div class="col-md-10">
+            <input name="emailaddress" type="email" class="form-control" value="{{users[edit_id].email}}" required=""/>
+        </div>
+    </div>
+    <div class="form-group">
+    <label for="roles" class="control-label col-md-2">Roles</label>
+        <div class="col-md-10">
+            <select name="roles" multiple class="form-control" required="">
+                <option ng-repeat="role in roles" value='{{role.id}}'>{{role.role}}</option>
+            </select>
+        </div>
+    </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+</form>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#editform').submit(function (e) {
+            toastr.options.positionClass = "toast-bottom-left";
+            toastr.success("Updating User...");
+            //e.preventDefault();
+        });
+    });
+</script>

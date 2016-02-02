@@ -26,7 +26,10 @@ class Issue_Model extends Model {
         global $REG;
         $this->_setting = $REG;
 
-        $sth = $this->db->prepare("SELECT issue_id, issue_title, issue_description, issue_createdon, (SELECT name FROM projects WHERE id=project_id) AS project_name FROM issues LIMIT 10");
+        $user = Session::get('user');
+        $userid = $user['id'];
+        
+        $sth = $this->db->prepare("SELECT i.issue_id AS issue_id, i.issue_title AS issue_title, i.issue_description AS issue_description, i.issue_createdon AS issue_createdon, p.name AS project_name FROM issues AS i JOIN projects AS p ON p.id=i.project_id JOIN projectaccess AS pa ON pa.project_id=p.id WHERE pa.user_id =".$userid." LIMIT 10");
         $sth->execute();
         $data = $sth->fetchAll(PDO::FETCH_ASSOC);
         
@@ -90,7 +93,10 @@ class Issue_Model extends Model {
         global $REG;
         $this->_setting = $REG;
 
-        $sth = $this->db->prepare("SELECT id, name FROM projects LIMIT 10");
+        $user = Session::get('user');
+        $userid = $user['id'];
+        
+        $sth = $this->db->prepare("SELECT p.id AS id, p.name AS name FROM projects AS p JOIN projectaccess AS pa ON pa.project_id=p.id WHERE pa.user_id = ". $userid ." LIMIT 10");
         $sth->execute();
         $data = $sth->fetchAll(PDO::FETCH_ASSOC);
         
