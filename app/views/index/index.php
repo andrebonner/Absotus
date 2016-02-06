@@ -7,19 +7,19 @@
             <i class="glyphicon glyphicon-th" style="font-size: 100px"></i> 
             <!--<img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">-->
             <h4>Projects</h4>
-            <span class="text-muted"><span ng-bind="data.length"></span></span>
+            <span class="text-muted"><span ng-bind="projects.length"></span></span>
         </div>
         <div class="col-xs-6 col-sm-3 placeholder">
             <i class="glyphicon glyphicon-list" style="font-size: 100px"></i> 
             <!--<img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">-->
             <h4>Issues</h4>
-            <span class="text-muted"><span ng-bind="projectIssues()"></span></span>
+            <span class="text-muted"><span ng-bind="issues.length"></span></span>
         </div>
         <div class="col-xs-6 col-sm-3 placeholder">
             <i class="glyphicon glyphicon-user" style="font-size: 100px"></i>                             
             <!--<img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">-->
             <h4>Users</h4>
-            <span class="text-muted"><span ng-bind="data.users.length"></span></span>
+            <span class="text-muted"><span ng-bind="users.length"></span></span>
         </div>
         <div class="col-xs-6 col-sm-3 placeholder" >
             <i class="glyphicon glyphicon-dashboard" style="font-size: 100px"></i>                            
@@ -42,7 +42,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="project in data">
+                <tr ng-repeat="project in projects">
                     <td><span ng-bind="project.id"></span></td>
                     <td><a href="<?php echo $this->data['cfg']->url; ?>#/project/details/{{project.id}}"><span ng-bind="project.name"></span></a></td>
                     <td><span ng-bind="project.description"></span></td>

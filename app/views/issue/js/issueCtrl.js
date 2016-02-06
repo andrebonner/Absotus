@@ -4,19 +4,19 @@ var issues = app.controller('issueController', function ($scope, $http, $routePa
     $http.get("issue/get").success(function (data) {
         $scope.issues = data;
     });
-    
+
     $http.get("issue/get/projects").success(function (data) {
         $scope.projects = data;
     });
-    
+
     $http.get("issue/get/types").success(function (data) {
         $scope.types = data;
     });
-    
+
     $http.get("issue/get/priorities").success(function (data) {
         $scope.priorities = data;
     });
-    
+
     $scope.edit_id = $routeParams.edit_id - 1;
     $scope.details_id = $routeParams.details_id - 1;
     $scope.delete_id = $routeParams.delete_id - 1;
@@ -28,6 +28,14 @@ var issues = app.controller('issueController', function ($scope, $http, $routePa
                          template: '<br/>'
                          
                          }).*/
+                        when('/Type', {
+                            templateUrl: 'app/views/issue/type/index.html',
+                            controller: 'issueController'
+                        }).
+                        when('/Priorities', {
+                            templateUrl: 'app/views/issue/edit.html',
+                            controller: 'issueController'
+                        }).
                         when('/edit/:edit_id', {
                             templateUrl: 'app/views/issue/edit.html',
                             controller: 'issueController'

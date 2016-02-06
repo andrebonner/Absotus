@@ -48,11 +48,18 @@ class Index extends Controller {
         $this->view->render("footer");
     }
 
-    function get($id = 0) {
-        
-        
-        
-        echo $this->model->dashboard();
+    function get($obj = '',$id = 0) {
+           
+        switch ($obj){
+            case 'users':
+                echo $this->model->users();
+                break;
+            case 'issues':
+                echo $this->model->issues();
+                break;
+            default:
+        echo $this->model->projects();
+        }
     }
 
 }

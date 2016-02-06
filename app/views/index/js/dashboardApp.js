@@ -32,10 +32,10 @@ var app = angular.module('dashboard', ['ngRoute'])
                     "submenu": [
                         {
                             "title": "Issue Types", 
-                            "url": "#/issueType"}, 
+                            "url": "#/Type"}, 
                         {
                             "title": "Issue Priorities", 
-                            "url": "#/issuePriorities"
+                            "url": "#/Priorities"
                         }
                     ]
                 },

@@ -1,0 +1,26 @@
+
+    <ng-view></ng-view>
+    <a href="#/issue/create">Add a Issue Type</a>
+    <h2 class="sub-header" ><span ng-bind="'Issue Types'"></span></h2>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th><span ng-bind="'#'"></span></th>
+                    <th><span ng-bind="'Issue Type'"></span></th>
+                    
+                    <th>&nbsp;</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="issue in issues">
+                    <td><span ng-bind="issue.issue_id"></span></td>
+                    <td><a href="<?php echo $this->data['cfg']->url; ?>#/details/{{issue.issue_id}}"><span ng-bind="issue.issue_title"></span></a></td>
+                    <td><a href="#/edit/{{issue.issue_id}}"><span ng-bind="'Edit'"></span></a>&nbsp;<span ng-bind="'|'"></span>&nbsp;<a href="#/details/{{issue.issue_id}}"><span ng-bind="'Details'"></span></a>&nbsp;<span ng-bind="'|'" ng-hide=""></span>&nbsp;<a href="#/delete/{{issue.issue_id}}" ng-hide=""><span ng-bind="'Delete'"></span></a></td>
+                </tr>
+
+            </tbody>
+        </table>
+
+     
+    </div>
