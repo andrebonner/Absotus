@@ -20,6 +20,41 @@ and open the template in the editor.
 
     </head>
     <body>
+        <!-- Settings Modal begins -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" >
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Settings</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-horizontal">
+                            <h5>Layout Options</h5>
+                            <div class="form-group">
+                                <div class="col-md-10">
+                                    <div class="btn-group" data-toggle="buttons">
+                                        <label class="btn btn-info">Fixed Layout
+                                            <input name="flayout" type="checkbox" class="form-control">
+                                        </label>
+                                        <label class="btn btn-info">Boxed Layout
+                                            <input name="flayout" type="checkbox" class="form-control">
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <h5>Skins</h5>
+                            
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Settings Modal ends -->
         <nav class="navbar navbar-inverse navbar-fixed-top">
             <div class="container-fluid">
                 <div class="navbar-header">
@@ -34,7 +69,7 @@ and open the template in the editor.
                 <div id="navbar" class="navbar-collapse collapse" ng-init='user =<?php print(json_encode($this->data['user'])); ?>'>
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="<?php echo $this->data['cfg']->url; ?>">Dashboard</a></li>
-                        <li><a href="#/settings">Settings</a></li>
+                        <li><a href="#/settings" data-toggle="modal" data-target="#myModal">Settings</a></li>
                         <li class="dropdown">
                             <a href="#" data-toggle="dropdown" title='{{user.username}}' >Profile</a>
                             <ul class="dropdown-menu">
@@ -67,13 +102,14 @@ and open the template in the editor.
                         <li><a href="#/user">Users</a></li>
                     </ul>-->
                     <ul class="nav nav-sidebar" >
-                        <li ng-repeat="m in navside| filter: search"><a href="{{m.url}}"><span ng-bind="m.title"></span></a></li>
+                        <li ng-repeat="m in navside| filter: search" ng-class="getCurrent(m.url)"><a href="{{m.url}}"><span ng-bind="m.title"></span></a></li>
                     </ul>
                     <ul class="nav nav-sidebar" >
-                        <li ng-repeat="m in menu| filter: search"><a href="{{m.url}}"><span ng-bind="m.title"></span></a>
+                        <li ng-repeat="m in menu| filter: search" ng-class="getCurrent(m.url)"><a href="{{m.url}}"><span ng-bind="m.title"></span></a>
                             <ul class="nav navbar-collapse">
                                 <li ng-repeat="s in m.submenu"><a href="{{m.url + s.url}}"><span ng-bind="s.title"></span></a></li>
                             </ul>
                         </li>
                     </ul>
+
                 </div>

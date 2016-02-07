@@ -94,7 +94,7 @@ class Index_Model extends Model {
         global $REG;
         $this->_setting = $REG;
 
-        $sth = $this->db->prepare("SELECT p.id, p.name, p.description, p.modifiedon, (SELECT COUNT(*) FROM issues AS i WHERE i.project_id = p.id) AS issues  FROM projects AS p LIMIT 10");
+        $sth = $this->db->prepare("SELECT p.id, p.name, p.description, DATE_FORMAT(p.modifiedon, '%Y-%d-%m') AS modifiedon, (SELECT COUNT(*) FROM issues AS i WHERE i.project_id = p.id) AS issues  FROM projects AS p");
         $sth->execute();
         $data = $sth->fetchAll(PDO::FETCH_ASSOC);
         

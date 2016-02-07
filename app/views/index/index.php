@@ -47,12 +47,20 @@
                     <td><a href="<?php echo $this->data['cfg']->url; ?>#/project/details/{{project.id}}"><span ng-bind="project.name"></span></a></td>
                     <td><span ng-bind="project.description"></span></td>
                     <td><span class="badge" ng-bind="project.issues"></span></td>
-                    <td><span ng-bind="project.modifiedon | date:'mmmm dd, yyyy'"></span></td>
+                    <td><span ng-bind="project.modifiedon | date:'fullDate'"></span></td>
                 </tr>
             </tbody>
         </table>
-        <ng-view></ng-view>
+        
         <a href="project">View All Projects</a>
 
     </div>
+    <h1>Reports</h1>
+   
+    <h1>Analytics</h1>
+     <div style="width: 50%">
+        <canvas id="canvas" height="450" width="600"></canvas>
+    </div>
+
+    <h1>Export</h1>
 </div>

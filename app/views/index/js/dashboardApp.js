@@ -5,12 +5,12 @@ var app = angular.module('dashboard', ['ngRoute'])
                         /*when('/',{
                          template: '<br/>'
                          
-                         }).*/
+                         }). 
                         when('/project#/edit/:edit_id', {
                             templateUrl: 'app/views/index/edit.html',
-                            controller: 'projectController'
-                        }).
-                        when('/project#/details/:details_id', {
+                            controller: 'mainController'
+                        }).*/
+                        when('#/project/details/:details_id', {
                             templateUrl: 'app/views/index/details.html',
                             controller: 'mainController'
                         }).
@@ -19,7 +19,7 @@ var app = angular.module('dashboard', ['ngRoute'])
                         });
             }
         ])
-        .controller('menuController', function ($scope) {
+        .controller('menuController', function ($scope, $location) {
             $scope.menu = [
                 {
                     "title": "Projects",
@@ -31,10 +31,10 @@ var app = angular.module('dashboard', ['ngRoute'])
                     "url": "issue",
                     "submenu": [
                         {
-                            "title": "Issue Types", 
-                            "url": "#/Type"}, 
+                            "title": "Issue Types",
+                            "url": "#/Type"},
                         {
-                            "title": "Issue Priorities", 
+                            "title": "Issue Priorities",
                             "url": "#/Priorities"
                         }
                     ]
@@ -42,26 +42,35 @@ var app = angular.module('dashboard', ['ngRoute'])
                 {
                     "title": "Users",
                     "url": "user",
-                    "submenu":null
+                    "submenu": null
                 }
             ];
 
             $scope.navside = [
                 {
                     "title": "Overview",
-                    "url": "#/"
+                    "url": "#/overview"
                 },
                 {
                     "title": "Reports",
-                    "url": "#/"
+                    "url": "#/reports"
                 },
                 {
                     "title": "Analytics",
-                    "url": "#/"
+                    "url": "#/analytics"
                 },
                 {
                     "title": "Export",
-                    "url": "#/"
+                    "url": "#/export"
                 }
             ];
+            $scope.getCurrent = function (path) {
+                //console.log(path);
+                if ($location.path().substr(0, path.length) === path) {
+                    //console.log(path);
+                    return 'current';
+                } else {
+                    return '';
+                }
+            };
         });

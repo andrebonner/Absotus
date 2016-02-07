@@ -41,6 +41,8 @@ class Index extends Controller {
             'app/views/index/js/dashboardApp.js',
             'app/views/index/js/mainCtrl.js',
             'app/webroot/bootstrap/js/bootstrap.min.js',
+            'app/webroot/chartjs/Chart.min.js',
+            'app/views/index/js/chart.js',
             'app/views/index/js/holder.js');
         echo "<!--" . strtoupper("Welcome to " . $this->view->data['cfg']->title) . "-->\n";
         $this->view->render("header");
