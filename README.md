@@ -10,7 +10,7 @@ Absotus Dashboard uses a number of open source technologies and projects:
 - Bootstrap
 - JQuery
 - PHP
-- Predque ()
+- Predque (Beta Version)
 - MySQL
 
 ### Installation
